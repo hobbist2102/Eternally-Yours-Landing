@@ -3,34 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eternally Yours | Wedding RSVP System</title>
+    <title>Eternally Yours | Elegant Wedding Management</title>
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Montserrat:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/good-vibes-pro" rel="stylesheet">
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
     <!-- Custom Cursor -->
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-
+    <div class="cursor cursor-dot"></div>
+    <div class="cursor cursor-outline"></div>
+    
     <!-- Progress Bar -->
-    <div class="progress-container">
-        <div class="progress-bar"></div>
-    </div>
-
+    <div class="progress-bar"></div>
+    
     <!-- Navigation -->
-    <nav class="glassmorphism">
+    <nav class="navbar glass">
         <div class="logo">
-            <h2>Eternally Yours</h2>
+            <h2 class="brand-title">Eternally Yours</h2>
         </div>
         <div class="nav-links">
             <a href="#features" class="nav-link">Features</a>
             <a href="#transport" class="nav-link">Solutions</a>
             <a href="#communication" class="nav-link">Communication</a>
-            <a href="#cta" class="btn-primary">Get Started</a>
+            <a href="#cta" class="btn btn-primary">Get Started</a>
         </div>
         <div class="menu-toggle">
             <span></span>
@@ -38,34 +40,203 @@
             <span></span>
         </div>
     </nav>
-
+    
     <!-- Hero Section -->
-    <section class="hero-section" id="home">
-        <div id="starlit-sky" class="starlit-sky"></div>
-        <div class="hero-content">
-            <h1 class="hero-title">Where Love's Journey Begins</h1>
-            <p class="hero-subtitle">The most elegant wedding management platform for Indian weddings. From the first whispered "yes" to the final farewell, orchestrate your celebration with grace and precision.</p>
-            <div class="hero-cta">
-                <a href="#cta" class="btn-primary">Begin Your Story</a>
-                <a href="#intro" class="btn-secondary">Discover More</a>
+    <section class="hero" id="home">
+        <div class="hero-bg" id="starlit-sky"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title brand-title">Where Love's Journey Begins</h1>
+                <p class="hero-subtitle">The most elegant wedding management platform for Indian weddings. From the first whispered "yes" to the final farewell, orchestrate your celebration with grace and precision.</p>
+                <div class="hero-cta">
+                    <a href="#cta" class="btn btn-primary">Begin Your Story</a>
+                    <a href="#intro" class="btn btn-secondary">Discover More</a>
+                </div>
             </div>
         </div>
         <div class="scroll-indicator">
             <span></span>
         </div>
     </section>
-
+    
     <!-- Introduction Section -->
-    <section class="intro-section" id="intro">
-        <div class="intro-container">
-            <div class="intro-content">
-                <h4 class="section-subheader">A Symphony of Moments</h4>
-                <h2>Behind the Scenes</h2>
-                <p>Indian Weddings are breathtaking celebrations—a tapestry of traditions, emotions, and cherished moments. Behind every stunning sangeet lies countless details demanding perfection.</p>
-                <p>Transform the complexity of planning into a harmonious experience. Replace endless spreadsheets and chaotic group chats with an elegant solution worthy of your celebration.</p>
+    <section class="section intro" id="intro">
+        <div class="container">
+            <div class="section-inner">
+                <div class="intro-container">
+                    <div class="intro-content">
+                        <h4 class="micro">A Symphony of Moments</h4>
+                        <h2>Behind the Scenes</h2>
+                        <p class="lead">Indian Weddings are breathtaking celebrations—a tapestry of traditions, emotions, and cherished moments. Behind every stunning sangeet lies countless details demanding perfection.</p>
+                        <p>Transform the complexity of planning into a harmonious experience. Replace endless spreadsheets and chaotic group chats with an elegant solution worthy of your celebration.</p>
+                    </div>
+                    <div class="intro-image">
+                        <div class="intro-card glass">
+                            <div class="chat-container">
+                                <div class="chat-message">
+                                    <div class="message-bubble message-system">
+                                        <p>Namaste Priya! We're excited to welcome you to Raj & Anita's wedding celebration. Your RSVP has been confirmed for all 3 days of ceremonies.</p>
+                                    </div>
+                                </div>
+                                <div class="chat-message">
+                                    <div class="message-bubble message-user">
+                                        <p>Thank you! I'm looking forward to it. Will there be transportation from the hotel to the venue?</p>
+                                    </div>
+                                </div>
+                                <div class="chat-message">
+                                    <div class="message-bubble message-system">
+                                        <p>Yes! We've arranged transportation for you. A car will pick you up from JW Marriott at 5:30 PM on Friday. We've made sure you'll be with your family members.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="intro-image">
-                <div class="intro-card glassmorphism">
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="section features" id="features">
+        <div class="container">
+            <div class="section-inner">
+                <div class="text-center mb-xl">
+                    <h4 class="micro">Elegant Simplicity</h4>
+                    <h2>in Every Detail</h2>
+                    <p class="lead mx-auto">Designed by wedding planners who understand the delicate art of celebration, our platform removes the noise, allowing you to plan with clarity and celebrate with your heart.</p>
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-card glass">
+                        <div class="feature-icon">
+                            <i class="fas fa-th-large"></i>
+                        </div>
+                        <h3>One Dashboard, Total Control</h3>
+                        <p>Curate every aspect of your celebration—guests, logistics, travel, accommodation, and communication—in one refined space.</p>
+                    </div>
+                    <div class="feature-card glass">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Family-Centered Design</h3>
+                        <p>Preserve the intimacy of family connections throughout your celebration journey, keeping loved ones together in travel, seating, and all communications.</p>
+                    </div>
+                    <div class="feature-card glass">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>From First Announcement to Final Farewell</h3>
+                        <p>Seamlessly orchestrate the entire wedding journey, from save-the-dates to departure arrangements, with grace and precision.</p>
+                    </div>
+                    <div class="feature-card glass">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>Integrated Communication</h3>
+                        <p>Elegant email templates and WhatsApp integration ensure your guests receive timely updates wrapped in your unique style.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Transport Section -->
+    <section class="section transport" id="transport">
+        <div class="container">
+            <div class="section-inner">
+                <div class="text-center mb-xl">
+                    <h4 class="micro">Travel Solutions</h4>
+                    <h2>Moving Together</h2>
+                    <p class="lead mx-auto">Our revolutionary transport management system ensures families travel together in comfort, with intelligent allocation based on arrival times and group compositions—transforming logistics into another beautiful aspect of your celebration.</p>
+                </div>
+                <div class="transport-content">
+                    <div class="transport-visual">
+                        <div class="transport-map glass" id="transport-map">
+                            <!-- Transport map visualization will be added via JavaScript -->
+                        </div>
+                    </div>
+                    <div class="transport-features">
+                        <div class="transport-feature">
+                            <div class="transport-feature-header">
+                                <div class="transport-icon">
+                                    <i class="fas fa-car"></i>
+                                </div>
+                                <h3>Smart Fleet Management</h3>
+                            </div>
+                            <p>Define your available fleet with vehicle types and capacities, ensuring every arrival and departure reflects your attention to detail.</p>
+                        </div>
+                        <div class="transport-feature">
+                            <div class="transport-feature-header">
+                                <div class="transport-icon">
+                                    <i class="fas fa-user-friends"></i>
+                                </div>
+                                <h3>Family Grouping</h3>
+                            </div>
+                            <p>Automatically keep families together in the same vehicle, preserving the intimate connections that make your celebration special.</p>
+                        </div>
+                        <div class="transport-feature">
+                            <div class="transport-feature-header">
+                                <div class="transport-icon">
+                                    <i class="fas fa-plane-arrival"></i>
+                                </div>
+                                <h3>Arrival Optimization</h3>
+                            </div>
+                            <p>Group travelers by arrival time to optimize vehicle usage while maintaining the comfort and convenience your guests deserve.</p>
+                        </div>
+                        <div class="transport-feature">
+                            <div class="transport-feature-header">
+                                <div class="transport-icon">
+                                    <i class="fas fa-bell"></i>
+                                </div>
+                                <h3>Effortless Notifications</h3>
+                            </div>
+                            <p>Automated updates about pickup times and locations for guests, with discreet notifications for planners about any changes or delays.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Communication Section -->
+    <section class="section communication" id="communication">
+        <div class="container">
+            <div class="section-inner">
+                <div class="text-center mb-xl">
+                    <h4 class="micro">Guest Communications</h4>
+                    <h2>Multichannel Guest Engagement</h2>
+                    <p class="lead mx-auto">Keep your guests informed and enchanted through personalized communications that reflect your style. Automate responses while maintaining the personal touch that makes your celebration unique.</p>
+                </div>
+                <div class="communication-grid">
+                    <div class="communication-card glass">
+                        <div class="communication-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h3>WhatsApp & AI Assistants</h3>
+                        <p>Send updates, collect RSVPs, and answer questions through elegant WhatsApp communications and sophisticated AI assistants.</p>
+                    </div>
+                    <div class="communication-card glass">
+                        <div class="communication-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Beautiful Email Templates</h3>
+                        <p>Send exquisitely designed, branded emails for invitations and updates that set the tone for your celebration.</p>
+                    </div>
+                    <div class="communication-card glass">
+                        <div class="communication-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Thoughtful Reminders</h3>
+                        <p>Schedule timely reminders for transportation and events, ensuring every guest feels cared for throughout your celebration.</p>
+                    </div>
+                    <div class="communication-card glass">
+                        <div class="communication-icon">
+                            <i class="fas fa-reply"></i>
+                        </div>
+                        <h3>Dynamic Follow-Ups</h3>
+                        <p>Personalized follow-up communications based on guest responses, creating a seamless experience from first invitation to final farewell.</p>
+                    </div>
+                </div>
+                <div class="communication-demo glass mt-xl">
                     <div class="chat-container">
                         <div class="chat-message">
                             <div class="message-bubble message-system">
@@ -82,277 +253,127 @@
                                 <p>Yes! We've arranged transportation for you. A car will pick you up from JW Marriott at 5:30 PM on Friday. We've made sure you'll be with your family members.</p>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features-section" id="features">
-        <div class="features-container">
-            <div class="section-header">
-                <h4 class="section-subheader">Elegant Simplicity</h4>
-                <h2>in Every Detail</h2>
-                <p>Designed by wedding planners who understand the delicate art of celebration, our platform removes the noise, allowing you to plan with clarity and celebrate with your heart.</p>
-            </div>
-            <div class="feature-grid">
-                <div class="feature-card glassmorphism">
-                    <div class="feature-icon">
-                        <i class="fas fa-th-large"></i>
-                    </div>
-                    <h3>One Dashboard, Total Control</h3>
-                    <p>Curate every aspect of your celebration—guests, logistics, travel, accommodation, and communication—in one refined space.</p>
-                </div>
-                <div class="feature-card glassmorphism">
-                    <div class="feature-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Family-Centered Design</h3>
-                    <p>Preserve the intimacy of family connections throughout your celebration journey, keeping loved ones together in travel, seating, and all communications.</p>
-                </div>
-                <div class="feature-card glassmorphism">
-                    <div class="feature-icon">
-                        <i class="fas fa-calendar-alt"></i>
-                    </div>
-                    <h3>From First Announcement to Final Farewell</h3>
-                    <p>Seamlessly orchestrate the entire wedding journey, from save-the-dates to departure arrangements, with grace and precision.</p>
-                </div>
-                <div class="feature-card glassmorphism">
-                    <div class="feature-icon">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <h3>Integrated Communication</h3>
-                    <p>Elegant email templates and WhatsApp integration ensure your guests receive timely updates wrapped in your unique style.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Transportation Section -->
-    <section class="transport-section" id="transport">
-        <div class="transport-container">
-            <div class="section-header">
-                <h4 class="section-subheader">Travel Solutions</h4>
-                <h2>Moving Together</h2>
-                <p>Our revolutionary transport management system ensures families travel together in comfort, with intelligent allocation based on arrival times and group compositions—transforming logistics into another beautiful aspect of your celebration.</p>
-            </div>
-            <div class="transport-content">
-                <div class="transport-visual">
-                    <div class="transport-map glassmorphism">
-                        <!-- Transport map visualization will be added via JavaScript -->
-                    </div>
-                </div>
-                <div class="transport-features">
-                    <div class="transport-feature">
-                        <div class="transport-feature-header">
-                            <div class="transport-icon">
-                                <i class="fas fa-car"></i>
+                        <div class="chat-message">
+                            <div class="message-bubble message-system">
+                                <p>Here are the transportation details:</p>
                             </div>
-                            <h3>Smart Fleet Management</h3>
                         </div>
-                        <p>Define your available fleet with vehicle types and capacities, ensuring every arrival and departure reflects your attention to detail.</p>
-                    </div>
-                    <div class="transport-feature">
-                        <div class="transport-feature-header">
-                            <div class="transport-icon">
-                                <i class="fas fa-user-friends"></i>
+                        <div class="chat-message">
+                            <div class="message-bubble message-system">
+                                <p>🚗 Your Transport Details<br>
+                                Date: June 17, 2025<br>
+                                Pickup: JW Marriott, 5:30 PM<br>
+                                Vehicle: White Innova (Sharma Family)</p>
                             </div>
-                            <h3>Family Grouping</h3>
                         </div>
-                        <p>Automatically keep families together in the same vehicle, preserving the intimate connections that make your celebration special.</p>
-                    </div>
-                    <div class="transport-feature">
-                        <div class="transport-feature-header">
-                            <div class="transport-icon">
-                                <i class="fas fa-plane-arrival"></i>
+                        <div class="chat-message">
+                            <div class="message-bubble message-user">
+                                <p>Perfect! Thank you for organizing this so well.</p>
                             </div>
-                            <h3>Arrival Optimization</h3>
-                        </div>
-                        <p>Group travelers by arrival time to optimize vehicle usage while maintaining the comfort and convenience your guests deserve.</p>
-                    </div>
-                    <div class="transport-feature">
-                        <div class="transport-feature-header">
-                            <div class="transport-icon">
-                                <i class="fas fa-bell"></i>
-                            </div>
-                            <h3>Effortless Notifications</h3>
-                        </div>
-                        <p>Automated updates about pickup times and locations for guests, with discreet notifications for planners about any changes or delays.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Communication Section -->
-    <section class="communication-section" id="communication">
-        <div class="communication-container">
-            <div class="section-header">
-                <h4 class="section-subheader">Guest Communications</h4>
-                <h2>Multichannel Guest Engagement</h2>
-                <p>Keep your guests informed and enchanted through personalized communications that reflect your style. Automate responses while maintaining the personal touch that makes your celebration unique.</p>
-            </div>
-            <div class="communication-grid">
-                <div class="communication-card glassmorphism">
-                    <div class="communication-icon">
-                        <i class="fab fa-whatsapp"></i>
-                    </div>
-                    <h3>WhatsApp & AI Assistants</h3>
-                    <p>Send updates, collect RSVPs, and answer questions through elegant WhatsApp communications and sophisticated AI assistants.</p>
-                </div>
-                <div class="communication-card glassmorphism">
-                    <div class="communication-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <h3>Beautiful Email Templates</h3>
-                    <p>Send exquisitely designed, branded emails for invitations and updates that set the tone for your celebration.</p>
-                </div>
-                <div class="communication-card glassmorphism">
-                    <div class="communication-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h3>Thoughtful Reminders</h3>
-                    <p>Schedule timely reminders for transportation and events, ensuring every guest feels cared for throughout your celebration.</p>
-                </div>
-                <div class="communication-card glassmorphism">
-                    <div class="communication-icon">
-                        <i class="fas fa-reply"></i>
-                    </div>
-                    <h3>Dynamic Follow-Ups</h3>
-                    <p>Personalized follow-up communications based on guest responses, creating a seamless experience from first invitation to final farewell.</p>
-                </div>
-            </div>
-            <div class="communication-demo glassmorphism">
-                <div class="chat-container">
-                    <div class="chat-message">
-                        <div class="message-bubble message-system">
-                            <p>Namaste Priya! We're excited to welcome you to Raj & Anita's wedding celebration. Your RSVP has been confirmed for all 3 days of ceremonies.</p>
-                        </div>
-                    </div>
-                    <div class="chat-message">
-                        <div class="message-bubble message-user">
-                            <p>Thank you! I'm looking forward to it. Will there be transportation from the hotel to the venue?</p>
-                        </div>
-                    </div>
-                    <div class="chat-message">
-                        <div class="message-bubble message-system">
-                            <p>Yes! We've arranged transportation for you. A car will pick you up from JW Marriott at 5:30 PM on Friday. We've made sure you'll be with your family members.</p>
-                        </div>
-                    </div>
-                    <div class="chat-message">
-                        <div class="message-bubble message-system">
-                            <p>Here are the transportation details:</p>
-                        </div>
-                    </div>
-                    <div class="chat-message">
-                        <div class="message-bubble message-system">
-                            <p>🚗 Your Transport Details<br>
-                            Date: June 17, 2025<br>
-                            Pickup: JW Marriott, 5:30 PM<br>
-                            Vehicle: White Innova (Sharma Family)</p>
-                        </div>
-                    </div>
-                    <div class="chat-message">
-                        <div class="message-bubble message-user">
-                            <p>Perfect! Thank you for organizing this so well.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
+    
     <!-- Testimonial Section -->
-    <section class="testimonial-section" id="testimonials">
-        <div class="testimonial-container">
-            <div class="section-header">
-                <h4 class="section-subheader">Client Stories</h4>
-                <h2>Love Stories Beautifully Told</h2>
-            </div>
-            <div class="testimonial-slider">
-                <div class="testimonial-card glassmorphism">
-                    <div class="testimonial-quote">
-                        Eternally Yours transformed our wedding planning from chaos to poetry. Every detail was perfect, every moment treasured.
-                    </div>
-                    <div class="testimonial-author">
-                        <h4>Priya & Arjun</h4>
-                        <p>Delhi</p>
-                    </div>
+    <section class="section testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-inner">
+                <div class="text-center mb-xl">
+                    <h4 class="micro">Client Stories</h4>
+                    <h2>Love Stories Beautifully Told</h2>
                 </div>
-                <div class="testimonial-nav">
-                    <div class="testimonial-dot active"></div>
-                    <div class="testimonial-dot"></div>
-                    <div class="testimonial-dot"></div>
+                <div class="testimonial-slider">
+                    <div class="testimonial-card glass">
+                        <div class="testimonial-quote">
+                            Eternally Yours transformed our wedding planning from chaos to poetry. Every detail was perfect, every moment treasured.
+                        </div>
+                        <div class="testimonial-author">
+                            <h4>Priya & Arjun</h4>
+                            <p>Delhi</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-nav">
+                        <div class="testimonial-dot active"></div>
+                        <div class="testimonial-dot"></div>
+                        <div class="testimonial-dot"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
+    
     <!-- CTA Section -->
-    <section class="cta-section" id="cta">
-        <div class="cta-container">
-            <h2 class="cta-title">Begin Your Journey</h2>
-            <p class="cta-text">Your love story deserves to be told with elegance and precision. Let Eternally Yours orchestrate the details while you focus on creating memories that will last a lifetime.</p>
-            <a href="#" class="btn-primary">Start Your Forever</a>
+    <section class="section cta" id="cta">
+        <div class="container">
+            <div class="cta-container">
+                <h2 class="cta-title">Begin Your Journey</h2>
+                <p class="cta-text">Your love story deserves to be told with elegance and precision. Let Eternally Yours orchestrate the details while you focus on creating memories that will last a lifetime.</p>
+                <a href="#" class="btn btn-primary">Start Your Forever</a>
+            </div>
         </div>
     </section>
-
+    
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <h2>Eternally Yours</h2>
-                <p>The most elegant wedding management platform for Indian weddings.</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2 class="brand-title">Eternally Yours</h2>
+                    <p>The most elegant wedding management platform for Indian weddings.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Features</h3>
+                        <ul>
+                            <li><a href="#">Dashboard</a></li>
+                            <li><a href="#">Family-Centered Design</a></li>
+                            <li><a href="#">Wedding Lifecycle</a></li>
+                            <li><a href="#">Communication</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Solutions</h3>
+                        <ul>
+                            <li><a href="#">Transportation</a></li>
+                            <li><a href="#">Guest Management</a></li>
+                            <li><a href="#">Event Planning</a></li>
+                            <li><a href="#">Vendor Coordination</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Connect</h3>
+                        <ul>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Support</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li class="social-links">
+                                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="footer-links">
-                <div class="footer-column">
-                    <h3>Features</h3>
-                    <ul>
-                        <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">Family-Centered Design</a></li>
-                        <li><a href="#">Wedding Lifecycle</a></li>
-                        <li><a href="#">Communication</a></li>
-                    </ul>
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2025 Eternally Yours. All rights reserved.</p>
+                <div class="legal-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
                 </div>
-                <div class="footer-column">
-                    <h3>Solutions</h3>
-                    <ul>
-                        <li><a href="#">Transportation</a></li>
-                        <li><a href="#">Guest Management</a></li>
-                        <li><a href="#">Event Planning</a></li>
-                        <li><a href="#">Vendor Coordination</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Connect</h3>
-                    <ul>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Support</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li class="social-links">
-                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p class="copyright">&copy; 2025 Eternally Yours. All rights reserved.</p>
-            <div class="legal-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
             </div>
         </div>
     </footer>
-
+    
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
-    <script src="script.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
+
 
