@@ -2,11 +2,8 @@
 
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize GSAP and ScrollTrigger
-    gsap.registerPlugin(ScrollTrigger);
-    
-    // Initialize particles.js for background effects
-    initParticles();
+    // Initialize Three.js for starlit sky
+    initStarlitSky();
     
     // Initialize custom cursor
     initCustomCursor();
@@ -23,9 +20,147 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize 3D card effects
     init3DCards();
     
-    // Initialize form animations
-    initFormAnimations();
+    // Initialize responsive navigation
+    initResponsiveNav();
+    
+    // Initialize testimonial slider
+    initTestimonialSlider();
+    
+    // Initialize transport map visualization
+    initTransportMap();
 });
+
+// Starlit sky background with Three.js
+function initStarlitSky() {
+    const container = document.getElementById('starlit-sky');
+    if (!container) return;
+    
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    
+    const renderer = new THREE.WebGLRenderer({ alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x000000, 0);
+    container.appendChild(renderer.domElement);
+    
+    // Create stars
+    const starsGeometry = new THREE.BufferGeometry();
+    const starsMaterial = new THREE.PointsMaterial({
+        color: 0xffffff,
+        size: 0.7,
+        transparent: true
+    });
+    
+    const starsVertices = [];
+    const starsCount = 1000;
+    
+    for (let i = 0; i < starsCount; i++) {
+        const x = (Math.random() - 0.5) * 2000;
+        const y = (Math.random() - 0.5) * 2000;
+        const z = (Math.random() - 0.5) * 2000;
+        starsVertices.push(x, y, z);
+    }
+    
+    starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
+    const stars = new THREE.Points(starsGeometry, starsMaterial);
+    scene.add(stars);
+    
+    // Create some larger, golden stars
+    const goldenStarsGeometry = new THREE.BufferGeometry();
+    const goldenStarsMaterial = new THREE.PointsMaterial({
+        color: 0xC9B037,
+        size: 1.5,
+        transparent: true
+    });
+    
+    const goldenStarsVertices = [];
+    const goldenStarsCount = 100;
+    
+    for (let i = 0; i < goldenStarsCount; i++) {
+        const x = (Math.random() - 0.5) * 2000;
+        const y = (Math.random() - 0.5) * 2000;
+        const z = (Math.random() - 0.5) * 2000;
+        goldenStarsVertices.push(x, y, z);
+    }
+    
+    goldenStarsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(goldenStarsVertices, 3));
+    const goldenStars = new THREE.Points(goldenStarsGeometry, goldenStarsMaterial);
+    scene.add(goldenStars);
+    
+    // Add some subtle shooting stars occasionally
+    function createShootingStar() {
+        const shootingStarGeometry = new THREE.BufferGeometry();
+        const shootingStarMaterial = new THREE.PointsMaterial({
+            color: 0xffffff,
+            size: 2,
+            transparent: true,
+            opacity: 1
+        });
+        
+        const startX = (Math.random() - 0.5) * 1000;
+        const startY = (Math.random() - 0.5) * 1000 + 500;
+        const startZ = -500;
+        
+        const vertices = [startX, startY, startZ];
+        shootingStarGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+        
+        const shootingStar = new THREE.Points(shootingStarGeometry, shootingStarMaterial);
+        scene.add(shootingStar);
+        
+        // Animate the shooting star
+        const endX = startX + (Math.random() - 0.5) * 200;
+        const endY = startY - 500;
+        
+        gsap.to(shootingStar.position, {
+            x: endX,
+            y: endY,
+            duration: 1.5,
+            ease: "power1.in",
+            onComplete: () => {
+                scene.remove(shootingStar);
+                shootingStarGeometry.dispose();
+                shootingStarMaterial.dispose();
+            }
+        });
+        
+        gsap.to(shootingStarMaterial, {
+            opacity: 0,
+            duration: 1.5,
+            ease: "power1.in"
+        });
+    }
+    
+    // Create shooting stars at random intervals
+    setInterval(() => {
+        if (Math.random() > 0.7) {
+            createShootingStar();
+        }
+    }, 3000);
+    
+    camera.position.z = 1000;
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+    
+    // Animation loop
+    function animate() {
+        requestAnimationFrame(animate);
+        
+        stars.rotation.y += 0.0002;
+        stars.rotation.x += 0.0001;
+        
+        goldenStars.rotation.y += 0.0001;
+        goldenStars.rotation.x += 0.0002;
+        
+        renderer.render(scene, camera);
+    }
+    
+    animate();
+}
 
 // Custom cursor implementation
 function initCustomCursor() {
@@ -54,13 +189,20 @@ function initCustomCursor() {
     });
     
     // Scale effect when hovering over interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, .card, .feature-card, .testimonial-card, .pricing-card');
+    const interactiveElements = document.querySelectorAll('a, button, .feature-card, .communication-card, .transport-feature, .testimonial-dot');
     
     interactiveElements.forEach(el => {
         el.addEventListener('mouseenter', () => {
             gsap.to(cursorOutline, {
                 scale: 1.5,
                 opacity: 0.5,
+                borderColor: '#C9B037',
+                duration: 0.3
+            });
+            
+            gsap.to(cursorDot, {
+                scale: 1.5,
+                backgroundColor: '#C9B037',
                 duration: 0.3
             });
         });
@@ -69,6 +211,13 @@ function initCustomCursor() {
             gsap.to(cursorOutline, {
                 scale: 1,
                 opacity: 1,
+                borderColor: '#C9B037',
+                duration: 0.3
+            });
+            
+            gsap.to(cursorDot, {
+                scale: 1,
+                backgroundColor: '#C9B037',
                 duration: 0.3
             });
         });
@@ -88,6 +237,16 @@ function initCustomCursor() {
             duration: 0.3
         });
     });
+    
+    // Hide default cursor
+    document.body.style.cursor = 'none';
+    
+    // Show default cursor on touch devices
+    if ('ontouchstart' in window) {
+        document.body.style.cursor = 'auto';
+        cursorDot.style.display = 'none';
+        cursorOutline.style.display = 'none';
+    }
 }
 
 // Scroll progress bar
@@ -103,141 +262,37 @@ function initScrollProgress() {
     });
 }
 
-// Particles background effect
-function initParticles() {
-    if (typeof particlesJS !== 'undefined' && document.getElementById('particles-js')) {
-        particlesJS('particles-js', {
-            particles: {
-                number: {
-                    value: 80,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: "#FFD700"
-                },
-                shape: {
-                    type: "circle",
-                    stroke: {
-                        width: 0,
-                        color: "#000000"
-                    },
-                },
-                opacity: {
-                    value: 0.3,
-                    random: true,
-                    animation: {
-                        enable: true,
-                        speed: 1,
-                        opacity_min: 0.1,
-                        sync: false
-                    }
-                },
-                size: {
-                    value: 3,
-                    random: true,
-                    animation: {
-                        enable: true,
-                        speed: 2,
-                        size_min: 0.1,
-                        sync: false
-                    }
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: "#FFD700",
-                    opacity: 0.2,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 1,
-                    direction: "none",
-                    random: true,
-                    straight: false,
-                    out_mode: "out",
-                    bounce: false,
-                }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: {
-                    onhover: {
-                        enable: true,
-                        mode: "grab"
-                    },
-                    onclick: {
-                        enable: true,
-                        mode: "push"
-                    },
-                    resize: true
-                },
-                modes: {
-                    grab: {
-                        distance: 140,
-                        line_linked: {
-                            opacity: 0.5
-                        }
-                    },
-                    push: {
-                        particles_nb: 4
-                    }
-                }
-            },
-            retina_detect: true
-        });
-    }
-}
-
 // Hero section animations
 function animateHero() {
-    const heroTitle = document.querySelector('.hero-title');
-    const heroSubtitle = document.querySelector('.hero-subtitle');
-    const heroCta = document.querySelector('.hero-cta');
-    const trustBadge = document.querySelector('.trust-badge');
-    const heroImage = document.querySelector('.hero-image');
+    const heroContent = document.querySelector('.hero-content');
+    const scrollIndicator = document.querySelector('.scroll-indicator');
     
-    if (!heroTitle || !heroSubtitle || !heroCta || !trustBadge || !heroImage) return;
+    if (!heroContent || !scrollIndicator) return;
     
     const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out" } });
     
     heroTimeline
-        .to(heroTitle, { opacity: 1, y: 0, duration: 1 })
-        .to(heroSubtitle, { opacity: 1, y: 0, duration: 1 }, "-=0.7")
-        .to(heroCta, { opacity: 1, y: 0, duration: 1 }, "-=0.7")
-        .to(trustBadge, { opacity: 1, y: 0, duration: 1 }, "-=0.7")
-        .to(heroImage, { opacity: 1, x: 0, duration: 1 }, "-=0.7");
-        
-    // Add floating animation to phone mockup
-    gsap.to('.phone-mockup', {
-        y: -20,
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: "power1.inOut"
-    });
+        .to(heroContent, { opacity: 1, y: 0, duration: 1.5, delay: 0.5 })
+        .to(scrollIndicator, { opacity: 1, duration: 1 }, "-=0.5");
 }
 
 // Scroll-triggered animations
 function initScrollAnimations() {
-    // Animate cards on scroll
-    gsap.utils.toArray('.card').forEach(card => {
-        gsap.from(card, {
-            y: 100,
+    // Animate section headers
+    gsap.utils.toArray('.section-header').forEach(header => {
+        gsap.from(header, {
+            y: 50,
             opacity: 0,
             duration: 1,
             scrollTrigger: {
-                trigger: card,
+                trigger: header,
                 start: "top bottom-=100",
                 toggleActions: "play none none none"
             }
         });
     });
     
-    // Animate feature cards on scroll
+    // Animate feature cards
     gsap.utils.toArray('.feature-card').forEach((card, i) => {
         gsap.from(card, {
             y: 100,
@@ -245,93 +300,110 @@ function initScrollAnimations() {
             duration: 1,
             delay: i * 0.2,
             scrollTrigger: {
-                trigger: '.features-container',
+                trigger: '.feature-grid',
                 start: "top bottom-=100",
                 toggleActions: "play none none none"
             }
         });
     });
     
-    // Animate testimonial cards on scroll
-    gsap.utils.toArray('.testimonial-card').forEach((card, i) => {
-        gsap.from(card, {
-            y: 100,
-            opacity: 0,
-            duration: 1,
-            delay: i * 0.2,
-            scrollTrigger: {
-                trigger: '.testimonials-container',
-                start: "top bottom-=100",
-                toggleActions: "play none none none"
-            }
-        });
-    });
-    
-    // Animate pricing cards on scroll
-    gsap.utils.toArray('.pricing-card').forEach((card, i) => {
-        gsap.from(card, {
-            y: 100,
-            opacity: 0,
-            duration: 1,
-            delay: i * 0.2,
-            scrollTrigger: {
-                trigger: '.pricing-container',
-                start: "top bottom-=100",
-                toggleActions: "play none none none"
-            }
-        });
-    });
-    
-    // Animate benefits
-    gsap.utils.toArray('.benefit').forEach((benefit, i) => {
-        gsap.to(benefit, {
+    // Animate transport features
+    gsap.utils.toArray('.transport-feature').forEach((feature, i) => {
+        gsap.to(feature, {
             x: 0,
             opacity: 1,
             duration: 1,
             delay: i * 0.2,
             scrollTrigger: {
-                trigger: '.solution-benefits',
+                trigger: '.transport-features',
                 start: "top bottom-=100",
                 toggleActions: "play none none none"
             }
         });
     });
     
-    // Animate stats
-    gsap.utils.toArray('.stat').forEach((stat, i) => {
-        gsap.from(stat, {
-            y: 50,
+    // Animate communication cards
+    gsap.utils.toArray('.communication-card').forEach((card, i) => {
+        gsap.from(card, {
+            y: 100,
             opacity: 0,
             duration: 1,
             delay: i * 0.2,
             scrollTrigger: {
-                trigger: '.stats-container',
+                trigger: '.communication-grid',
                 start: "top bottom-=100",
                 toggleActions: "play none none none"
             }
         });
     });
     
-    // Animate steps
-    gsap.utils.toArray('.step').forEach((step, i) => {
-        const stepTimeline = gsap.timeline({
+    // Animate testimonial card
+    gsap.from('.testimonial-card', {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        scrollTrigger: {
+            trigger: '.testimonial-slider',
+            start: "top bottom-=100",
+            toggleActions: "play none none none"
+        }
+    });
+    
+    // Animate CTA section
+    gsap.from('.cta-title', {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        scrollTrigger: {
+            trigger: '.cta-section',
+            start: "top bottom-=100",
+            toggleActions: "play none none none"
+        }
+    });
+    
+    gsap.from('.cta-text', {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        delay: 0.2,
+        scrollTrigger: {
+            trigger: '.cta-section',
+            start: "top bottom-=100",
+            toggleActions: "play none none none"
+        }
+    });
+    
+    gsap.from('.cta-section .btn-primary', {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        delay: 0.4,
+        scrollTrigger: {
+            trigger: '.cta-section',
+            start: "top bottom-=100",
+            toggleActions: "play none none none"
+        }
+    });
+    
+    // Animate chat messages
+    gsap.utils.toArray('.chat-message').forEach((message, i) => {
+        gsap.from(message, {
+            y: 20,
+            opacity: 0,
+            duration: 0.5,
+            delay: i * 0.3,
             scrollTrigger: {
-                trigger: step,
+                trigger: message.closest('.chat-container'),
                 start: "top bottom-=100",
                 toggleActions: "play none none none"
             }
         });
-        
-        stepTimeline
-            .from(step.querySelector('.step-number'), { scale: 0, duration: 0.6 })
-            .from(step.querySelector('.step-content'), { x: -50, opacity: 0, duration: 0.6 }, "-=0.3")
-            .from(step.querySelector('.step-image'), { x: 50, opacity: 0, duration: 0.6 }, "-=0.3");
     });
 }
 
 // 3D card tilt effect
 function init3DCards() {
-    const cards = document.querySelectorAll('.card, .feature-card, .testimonial-card, .pricing-card');
+    const cards = document.querySelectorAll('.feature-card, .communication-card, .testimonial-card, .intro-card');
     
     cards.forEach(card => {
         card.addEventListener('mousemove', e => {
@@ -342,10 +414,10 @@ function init3DCards() {
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
             
-            const rotateX = (y - centerY) / 10;
-            const rotateY = (centerX - x) / 10;
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
             
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
         });
         
         card.addEventListener('mouseleave', () => {
@@ -361,183 +433,28 @@ function init3DCards() {
     });
 }
 
-// Form field animations
-function initFormAnimations() {
-    const formInputs = document.querySelectorAll('.form-group input, .form-group select');
-    
-    formInputs.forEach(input => {
-        input.addEventListener('focus', () => {
-            gsap.to(input, {
-                borderColor: '#FFD700',
-                boxShadow: '0 0 0 3px rgba(255, 215, 0, 0.3)',
-                duration: 0.3
-            });
-        });
-        
-        input.addEventListener('blur', () => {
-            if (!input.value) {
-                gsap.to(input, {
-                    borderColor: 'rgba(255, 255, 255, 0.1)',
-                    boxShadow: 'none',
-                    duration: 0.3
-                });
-            }
-        });
-    });
-    
-    // Form submission animation
-    const form = document.querySelector('.contact-form');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const button = form.querySelector('button');
-            const originalText = button.textContent;
-            
-            // Button animation
-            gsap.to(button, {
-                scale: 0.95,
-                duration: 0.1,
-                onComplete: () => {
-                    gsap.to(button, {
-                        scale: 1,
-                        duration: 0.3
-                    });
-                }
-            });
-            
-            // Change button text with loading animation
-            button.textContent = "Processing...";
-            
-            // Simulate form submission (would be replaced with actual AJAX call)
-            setTimeout(() => {
-                button.textContent = "Success! ✓";
-                
-                gsap.to(button, {
-                    backgroundColor: '#4CAF50',
-                    duration: 0.3
-                });
-                
-                // Reset form after delay
-                setTimeout(() => {
-                    form.reset();
-                    button.textContent = originalText;
-                    
-                    gsap.to(button, {
-                        backgroundColor: '',
-                        duration: 0.3
-                    });
-                }, 2000);
-            }, 1500);
-        });
-    }
-}
-
-// Magnetic button effect
-document.addEventListener('DOMContentLoaded', function() {
-    const buttons = document.querySelectorAll('.btn-primary');
-    
-    buttons.forEach(btn => {
-        btn.addEventListener('mousemove', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const distanceX = x - centerX;
-            const distanceY = y - centerY;
-            
-            gsap.to(this, {
-                x: distanceX / 6,
-                y: distanceY / 6,
-                duration: 0.3,
-                ease: "power2.out"
-            });
-        });
-        
-        btn.addEventListener('mouseleave', function() {
-            gsap.to(this, {
-                x: 0,
-                y: 0,
-                duration: 0.5,
-                ease: "elastic.out(1, 0.3)"
-            });
-        });
-    });
-});
-
-// Smooth scrolling for navigation links
-document.addEventListener('DOMContentLoaded', function() {
-    const links = document.querySelectorAll('a[href^="#"]');
-    
-    links.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (!targetElement) return;
-            
-            const targetPosition = targetElement.offsetTop - 100;
-            
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
-        });
-    });
-});
-
-// Parallax effect for background elements
-document.addEventListener('DOMContentLoaded', function() {
-    window.addEventListener('scroll', function() {
-        const scrollPosition = window.pageYOffset;
-        
-        // Parallax for hero section
-        const heroSection = document.querySelector('.hero-section');
-        if (heroSection) {
-            heroSection.style.backgroundPosition = `center ${scrollPosition * 0.5}px`;
-        }
-        
-        // Parallax for other sections with backgrounds
-        const sections = document.querySelectorAll('.pain-points-section, .solution-section, .testimonials-section');
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            
-            if (scrollPosition + window.innerHeight > sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                const yPos = (scrollPosition - sectionTop) * 0.2;
-                section.style.backgroundPosition = `center ${yPos}px`;
-            }
-        });
-    });
-});
-
-// Responsive navigation menu
-document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.createElement('div');
-    menuToggle.className = 'menu-toggle';
-    menuToggle.innerHTML = '<span></span><span></span><span></span>';
-    
-    const nav = document.querySelector('nav');
+// Responsive navigation
+function initResponsiveNav() {
+    const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
     
-    if (nav && navLinks) {
-        nav.insertBefore(menuToggle, navLinks);
-        
-        menuToggle.addEventListener('click', function() {
-            this.classList.toggle('active');
-            navLinks.classList.toggle('active');
+    if (!menuToggle || !navLinks) return;
+    
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+    
+    // Close menu when clicking a link
+    const links = navLinks.querySelectorAll('a');
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
         });
-    }
-});
-
-// Add this to your CSS
-document.addEventListener('DOMContentLoaded', function() {
+    });
+    
+    // Add styles for responsive menu
     const style = document.createElement('style');
     style.textContent = `
         .menu-toggle {
@@ -551,9 +468,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         .menu-toggle span {
             display: block;
-            height: 3px;
+            height: 2px;
             width: 100%;
-            background-color: var(--text-color);
+            background-color: var(--accent-color);
             transition: all 0.3s ease;
         }
         
@@ -579,19 +496,258 @@ document.addEventListener('DOMContentLoaded', function() {
                 top: 80px;
                 left: 0;
                 width: 100%;
-                background: var(--primary-color);
+                background: rgba(26, 9, 51, 0.95);
+                backdrop-filter: blur(10px);
                 flex-direction: column;
                 align-items: center;
                 padding: 20px 0;
                 clip-path: circle(0% at top right);
                 transition: clip-path 0.5s ease-in-out;
+                display: none;
             }
             
             .nav-links.active {
                 clip-path: circle(150% at top right);
                 display: flex;
             }
+            
+            .nav-link {
+                margin: 15px 0;
+            }
         }
     `;
     document.head.appendChild(style);
+}
+
+// Testimonial slider
+function initTestimonialSlider() {
+    const testimonials = [
+        {
+            quote: "Eternally Yours transformed our wedding planning from chaos to poetry. Every detail was perfect, every moment treasured.",
+            author: "Priya & Arjun",
+            location: "Delhi"
+        },
+        {
+            quote: "The transportation system alone saved us countless headaches. Our families arrived together, relaxed and ready to celebrate.",
+            author: "Meera & Raj",
+            location: "Mumbai"
+        },
+        {
+            quote: "The elegant communication tools made our guests feel valued and informed. The AI assistant answered questions we hadn't even thought of!",
+            author: "Anita & Vikram",
+            location: "Bangalore"
+        }
+    ];
+    
+    const testimonialCard = document.querySelector('.testimonial-card');
+    const dots = document.querySelectorAll('.testimonial-dot');
+    
+    if (!testimonialCard || !dots.length) return;
+    
+    let currentIndex = 0;
+    
+    // Set up click handlers for dots
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentIndex = index;
+            updateTestimonial();
+        });
+    });
+    
+    function updateTestimonial() {
+        // Update active dot
+        dots.forEach((dot, index) => {
+            if (index === currentIndex) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+        
+        // Animate out current testimonial
+        gsap.to(testimonialCard, {
+            opacity: 0,
+            y: -20,
+            duration: 0.5,
+            onComplete: () => {
+                // Update content
+                const testimonial = testimonials[currentIndex];
+                const quoteElement = testimonialCard.querySelector('.testimonial-quote');
+                const authorNameElement = testimonialCard.querySelector('.testimonial-author h4');
+                const authorLocationElement = testimonialCard.querySelector('.testimonial-author p');
+                
+                if (quoteElement) quoteElement.textContent = testimonial.quote;
+                if (authorNameElement) authorNameElement.textContent = testimonial.author;
+                if (authorLocationElement) authorLocationElement.textContent = testimonial.location;
+                
+                // Animate in new testimonial
+                gsap.to(testimonialCard, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.5
+                });
+            }
+        });
+    }
+    
+    // Auto-rotate testimonials
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % testimonials.length;
+        updateTestimonial();
+    }, 5000);
+}
+
+// Transport map visualization
+function initTransportMap() {
+    const transportMap = document.querySelector('.transport-map');
+    if (!transportMap) return;
+    
+    // Create canvas for map visualization
+    const canvas = document.createElement('canvas');
+    canvas.width = transportMap.clientWidth;
+    canvas.height = transportMap.clientHeight;
+    transportMap.appendChild(canvas);
+    
+    const ctx = canvas.getContext('2d');
+    
+    // Define locations
+    const locations = [
+        { name: 'Airport', x: 50, y: 200, color: '#5E35B1' },
+        { name: 'Hotel', x: 250, y: 150, color: '#5E35B1' },
+        { name: 'Venue', x: 450, y: 250, color: '#C9B037' }
+    ];
+    
+    // Define routes
+    const routes = [
+        { from: 0, to: 1, color: '#5E35B1' },
+        { from: 1, to: 2, color: '#C9B037' }
+    ];
+    
+    // Define vehicles
+    const vehicles = [
+        { route: 0, progress: 0, color: '#FFFFFF', size: 8 },
+        { route: 1, progress: 0, color: '#FFFFFF', size: 8 }
+    ];
+    
+    // Animation loop
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Draw routes
+        routes.forEach(route => {
+            const fromLocation = locations[route.from];
+            const toLocation = locations[route.to];
+            
+            ctx.beginPath();
+            ctx.moveTo(fromLocation.x, fromLocation.y);
+            ctx.lineTo(toLocation.x, toLocation.y);
+            ctx.strokeStyle = route.color;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        });
+        
+        // Draw locations
+        locations.forEach(location => {
+            ctx.beginPath();
+            ctx.arc(location.x, location.y, 10, 0, Math.PI * 2);
+            ctx.fillStyle = location.color;
+            ctx.fill();
+            
+            ctx.font = '14px Cormorant Garamond';
+            ctx.fillStyle = '#FFFFFF';
+            ctx.textAlign = 'center';
+            ctx.fillText(location.name, location.x, location.y - 20);
+        });
+        
+        // Draw and update vehicles
+        vehicles.forEach(vehicle => {
+            const route = routes[vehicle.route];
+            const fromLocation = locations[route.from];
+            const toLocation = locations[route.to];
+            
+            // Update position
+            vehicle.progress += 0.005;
+            if (vehicle.progress > 1) vehicle.progress = 0;
+            
+            const x = fromLocation.x + (toLocation.x - fromLocation.x) * vehicle.progress;
+            const y = fromLocation.y + (toLocation.y - fromLocation.y) * vehicle.progress;
+            
+            // Draw vehicle
+            ctx.beginPath();
+            ctx.arc(x, y, vehicle.size, 0, Math.PI * 2);
+            ctx.fillStyle = vehicle.color;
+            ctx.fill();
+        });
+        
+        requestAnimationFrame(animate);
+    }
+    
+    animate();
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        canvas.width = transportMap.clientWidth;
+        canvas.height = transportMap.clientHeight;
+    });
+}
+
+// Smooth scrolling for navigation links
+document.addEventListener('DOMContentLoaded', function() {
+    const links = document.querySelectorAll('a[href^="#"]');
+    
+    links.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (!targetElement) return;
+            
+            const navHeight = document.querySelector('nav').offsetHeight;
+            const targetPosition = targetElement.offsetTop - navHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        });
+    });
 });
+
+// Magnetic button effect
+document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.btn-primary');
+    
+    buttons.forEach(btn => {
+        btn.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const distanceX = x - centerX;
+            const distanceY = y - centerY;
+            
+            gsap.to(this, {
+                x: distanceX / 10,
+                y: distanceY / 10,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
+        
+        btn.addEventListener('mouseleave', function() {
+            gsap.to(this, {
+                x: 0,
+                y: 0,
+                duration: 0.5,
+                ease: "elastic.out(1, 0.3)"
+            });
+        });
+    });
+});
+
