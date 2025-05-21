@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eternally Yours - Transform Your Indian Wedding Journey</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Three.js for 3D effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="glassmorphism">
+        <div class="logo">
+            <h2>Eternally Yours</h2>
+        </div>
+        <div class="nav-links">
+            <a href="#features" class="nav-link">Features</a>
+            <a href="#testimonials" class="nav-link">Stories</a>
+            <a href="#pricing" class="nav-link">Pricing</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </div>
+        <div class="cta-button">
+            <a href="#get-started" class="btn-primary">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="particles-container" id="particles-js"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Transform Your <span>Indian Wedding</span> Journey</h1>
+            <p class="hero-subtitle">From RSVP to farewell, manage your big fat Indian wedding with elegance—not spreadsheets.</p>
+            <div class="hero-cta">
+                <a href="#get-started" class="btn-primary">Start Your Wedding Journey</a>
+                <a href="#testimonials" class="btn-secondary">See Real Wedding Stories</a>
+            </div>
+            <div class="trust-badge">
+                <p>Trusted by 10,000+ Indian weddings</p>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="phone-mockup">
+                <div class="phone-screen">
+                    <div class="app-interface">
+                        <div class="app-header">Eternally Yours</div>
+                        <div class="app-content">
+                            <h3>RSVP</h3>
+                            <p>Manage your guest list with ease</p>
+                            <div class="app-button">Accept</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pain Points Section -->
+    <section id="pain-points" class="pain-points-section">
+        <div class="section-header">
+            <h2>Behind Every Stunning Wedding Lies a Choice</h2>
+            <p>Indian weddings are breathtaking celebrations—but behind the scenes, the logistics can be overwhelming.</p>
+        </div>
+        <div class="cards-container">
+            <div class="card glassmorphism">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM5 19V5H19V19H5Z" fill="#FFD700"/>
+                        <path d="M12 6C9.24 6 7 8.24 7 11C7 13.76 9.24 16 12 16C14.76 16 17 13.76 17 11C17 8.24 14.76 6 12 6ZM12 14C10.34 14 9 12.66 9 11C9 9.34 10.34 8 12 8C13.66 8 15 9.34 15 11C15 12.66 13.66 14 12 14Z" fill="#FFD700"/>
+                    </svg>
+                </div>
+                <h3>Guest Management Chaos</h3>
+                <p>Managing RSVPs from hundreds of guests across multiple events becomes a full-time job</p>
+            </div>
+            <div class="card glassmorphism">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM19 19H5V5H19V19Z" fill="#FFD700"/>
+                        <path d="M7 7H17V9H7V7Z" fill="#FFD700"/>
+                        <path d="M7 11H17V13H7V11Z" fill="#FFD700"/>
+                        <path d="M7 15H14V17H7V15Z" fill="#FFD700"/>
+                    </svg>
+                </div>
+                <h3>Endless Spreadsheets</h3>
+                <p>Logistics planning leads to countless spreadsheets, late nights, and missed details</p>
+            </div>
+            <div class="card glassmorphism">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5H6.5C5.84 5 5.29 5.42 5.08 6.01L3 12V20C3 20.55 3.45 21 4 21H5C5.55 21 6 20.55 6 20V19H18V20C18 20.55 18.45 21 19 21H20C20.55 21 21 20.55 21 20V12L18.92 6.01ZM6.5 16C5.67 16 5 15.33 5 14.5C5 13.67 5.67 13 6.5 13C7.33 13 8 13.67 8 14.5C8 15.33 7.33 16 6.5 16ZM17.5 16C16.67 16 16 15.33 16 14.5C16 13.67 16.67 13 17.5 13C18.33 13 19 13.67 19 14.5C19 15.33 18.33 16 17.5 16ZM5 11L6.5 6.5H17.5L19 11H5Z" fill="#FFD700"/>
+                    </svg>
+                </div>
+                <h3>Transportation Nightmares</h3>
+                <p>Coordinating guest transportation between venues creates confusion and stress</p>
+            </div>
+            <div class="card glassmorphism">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16Z" fill="#FFD700"/>
+                        <path d="M12 15L14 11L18 9L14 7L12 3L10 7L6 9L10 11L12 15Z" fill="#FFD700"/>
+                    </svg>
+                </div>
+                <h3>Communication Breakdown</h3>
+                <p>Important updates get lost in group chats, leading to missed information and frustrated guests</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Overview -->
+    <section id="solution" class="solution-section">
+        <div class="section-header">
+            <h2>Elegant Simplicity in Every Detail</h2>
+            <p>Designed by wedding planners who understand Indian celebrations, our platform brings clarity to complexity so you can focus on what matters—celebrating with your loved ones.</p>
+        </div>
+        <div class="solution-container">
+            <div class="solution-image">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="app-interface">
+                            <div class="app-header">Dashboard</div>
+                            <div class="app-content">
+                                <div class="dashboard-item">
+                                    <div class="dashboard-icon"></div>
+                                    <div class="dashboard-text">
+                                        <h4>Guest List</h4>
+                                        <p>245/300 Confirmed</p>
+                                    </div>
+                                </div>
+                                <div class="dashboard-item">
+                                    <div class="dashboard-icon"></div>
+                                    <div class="dashboard-text">
+                                        <h4>Transportation</h4>
+                                        <p>15 Vehicles Assigned</p>
+                                    </div>
+                                </div>
+                                <div class="dashboard-item">
+                                    <div class="dashboard-icon"></div>
+                                    <div class="dashboard-text">
+                                        <h4>Accommodations</h4>
+                                        <p>120 Rooms Booked</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="solution-benefits">
+                <div class="benefit">
+                    <div class="benefit-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM19 19H5V5H19V19Z" fill="#FFD700"/>
+                            <path d="M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" fill="#FFD700"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-text">
+                        <h3>One unified platform</h3>
+                        <p>Manage your entire wedding journey in a single place</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 11C17.66 11 18.99 9.66 18.99 8C18.99 6.34 17.66 5 16 5C14.34 5 13 6.34 13 8C13 9.66 14.34 11 16 11ZM8 11C9.66 11 10.99 9.66 10.99 8C10.99 6.34 9.66 5 8 5C6.34 5 5 6.34 5 8C5 9.66 6.34 11 8 11ZM8 13C5.67 13 1 14.17 1 16.5V19H15V16.5C15 14.17 10.33 13 8 13ZM16 13C15.71 13 15.38 13.02 15.03 13.05C16.19 13.89 17 15.02 17 16.5V19H23V16.5C23 14.17 18.33 13 16 13Z" fill="#FFD700"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-text">
+                        <h3>Family-centered design</h3>
+                        <p>Respects Indian wedding traditions and family connections</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#FFD700"/>
+                            <path d="M12.5 7H11V13L16.25 16.15L17 14.92L12.5 12.25V7Z" fill="#FFD700"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-text">
+                        <h3>Seamless guest experience</h3>
+                        <p>From invitation to farewell, every detail is covered</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#FFD700"/>
+                            <path d="M12 17L12 12" stroke="#FFD700" stroke-width="2"/>
+                            <circle cx="12" cy="8" r="1" fill="#FFD700"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-text">
+                        <h3>Peace of mind</h3>
+                        <p>Automated updates and reminders keep everyone informed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="section-header">
+            <h2>Core Features</h2>
+        </div>
+        <div class="features-container">
+            <div class="feature-card glassmorphism">
+                <div class="feature-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 13H11V3H3V13ZM3 21H11V15H3V21ZM13 21H21V11H13V21ZM13 3V9H21V3H13Z" fill="#FFD700"/>
+                    </svg>
+                </div>
+                <h3>One Dashboard, Total Control</h3>
+                <p>Manage guests, logistics, travel, accommodation, and communication in a single, intuitive interface.</p>
+                <div class="feature-benefit">
+                    <p>Save 15+ hours per week on wedding planning tasks</p>
+                </div>
+            </div>
+            <div class="feature-card glassmorphism">
+                <div class="feature-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 11C17.66 11 18.99 9.66 18.99 8C18.99 6.34 17.66 5 16 5C14.34 5 13 6.34 13 8C13 9.66 14.34 11 16 11ZM8 11C9.66 11 10.99 9.66 10.99 8C10.99 6.34 9.66 5 8 5C6.34 5 5 6.34 5 8C5 9.66 6.34 11 8 11ZM8 13C5.67 13 1 14.17 1 16.5V19H15V16.5C15 14.17 10.33 13 8 13ZM16 13C15.71 13 15.38 13.02 15.03 13.05C16.19 13.89 17 15.02 17 16.5V19H23V16.5C23 14.17 18.33 13 16 13Z" fill="#FFD700"/>
+                    </svg>
+                </div>
+                <h3>Keep Families Together</h3>
+                <p>Our unique family grouping system ensures relatives stay together for travel, seating, and communications.</p>
+                <div class="feature-benefit">
+                    <p>Automatically organize guests by family relationships with one click</p>
+                </div>
+            </div>
+            <div class="feature-card glassmorphism">
+                <div class="feature-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4ZM19 20H5V10H19V20ZM19 8H5V6H19V8ZM9 14H7V12H9V14ZM13 14H11V12H13V14ZM17 14H15V12H17V14ZM9 18H7V16H9V18ZM13 18H11V16H13V18ZM17 18H15V16H17V18Z" fill="#FFD700"/>
+                    </svg>
+                </div>
+                <h3>From Save-the-Date to Departure</h3>
+                <p>Seamlessly manage your entire wedding journey from initial invitations to final farewells.</p>
+                <div class="feature-benefit">
+                    <p>Never miss a critical planning milestone with smart timeline alerts</p>
+                </div>
+            </div>
+            <div class="feature-card glassmorphism">
+                <div class="feature-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16Z" fill="#FFD700"/>
+                        <path d="M12 15L14 11L18 9L14 7L12 3L10 7L6 9L10 11L12 15Z" fill="#FFD700"/>
+                    </svg>
+                </div>
+                <h3>The Right Message at the Right Time</h3>
+                <p>Automated yet personalized updates via email and WhatsApp keep every guest informed without overwhelming them.</p>
+                <div class="feature-benefit">
+                    <p>Reduce guest questions by 80% with proactive, personalized updates</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transportation Section -->
+    <section id="transportation" class="transportation-section">
+        <div class="section-header">
+            <h2>Moving Together: Family-Centric Transportation</h2>
+            <p>Our revolutionary transport management system ensures families travel together comfortably with intelligent allocation based on arrival times and group sizes.</p>
+        </div>
+        <div class="transportation-container">
+            <div class="transportation-visual">
+                <div class="transport-map">
+                    <div class="map-point airport">Airport</div>
+                    <div class="map-point hotel">Hotel</div>
+                    <div class="map-point venue">Venue</div>
+                    <div class="map-route route1"></div>
+                    <div class="map-route route2"></div>
+                    <div class="transport-vehicle vehicle1">
+                        <div class="vehicle-icon"></div>
+                    </div>
+                    <div class="transport-vehicle vehicle2">
+                        <div class="vehicle-icon"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="transportation-features">
+                <div class="transport-feature">
+                    <div class="feature-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5H6.5C5.84 5 5.29 5.42 5.08 6.01L3 12V20C3 20.55 3.45 21 4 21H5C5.55 21 6 20.55 6 20V19H18V20C18 20.55 18.45 21 19 21H20C20.55 21 21 20.55 21 20V12L18.92 6.01ZM6.5 16C5.67 16 5 15.33 5 14.5C5 13.67 5.67 13 6.5 13C7.33 13 8 13.67 8 14.5C8 15.33 7.33 16 6.5 16ZM17.5 16C16.67 16 16 15.33 16 14.5C16 13.67 16.67 13 17.5 13C18.33 13 19 13.67 19 14.5C19 15.33 18.33 16 17.5 16ZM5 11L6.5 6.5H17.5L19 11H5Z" fill="#FFD700"/>
+                        </svg>
+                    </div>
+                    <h3>Smart Fleet Management</h3>
+                    <p>Define your available fleet with vehicle types and capacities</p>
+                </div>
+                <div class="transport-feature">
+                    <div class="feature-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 11C17.66 11 18.99 9.66 18.99 8C18.99 6.34 17.66 5 16 5C14.34 5 13 6.34 13 8C13 9.66 14.34 11 16 11ZM8 11C9.66 11 10.99 9.66 10.99 8C10.99 6.34 9.66 5 8 5C6.34 5 5 6.34 5 8C5 9.66 6.34 11 8 11ZM8 13C5.67 13 1 14.17 1 16.5V19H15V16.5C15 14.17 10.33 13 8 13ZM16 13C15.71 13 15.38 13.02 15.03 13.05C16.19 13.89 17 15.02 17 16.5V19H23V16.5C23 14.17 18.33 13 16 13Z" fill="#FFD700"/>
+                        </svg>
+                    </div>
+                    <h3>Family Grouping</h3>
+                    <p>Automatically keep families together in the same vehicle</p>
+                </div>
+                <div class="transport-feature">
+                    <div class="feature-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.99 2C6.47 2 2 6.48 2 12C2 17.52 6.47 22 11.99 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 11.99 2ZM12 20C7.58 20 4 16.42 4 12C4 7.58 7.58 4 12 4C16.42 4 20 7.58 20 12C20 16.42 16.42 20 12 20ZM12.5 7H11V13L16.25 16.15L17 14.92L12.5 12.25V7Z" fill="#FFD700"/>
+                        </svg>
+                    </div>
+                    <h3>Arrival Optimization</h3>
+                    <p>Group travelers by arrival time to optimize vehicle usage</p>
+                </div>
+                <div class="transport-feature">
+                    <div class="feature-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16Z" fill="#FFD700"/>
+                            <path d="M11 12H13V14H11V12ZM11 6H13V10H11V6Z" fill="#FFD700"/>
+                        </svg>
+                    </div>
+                    <h3>Effortless Notifications</h3>
+                    <p>Automated updates about pickup times and locations for guests and planners</p>
+                </div>
+            </div>
+        </div>
+        <div class="section-cta">
+            <a href="#get-started" class="btn-primary">Solve Your Wedding Transportation Challenges</a>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="section-header">
+            <h2>Celebrations Transformed</h2>
+        </div>
+        <div class="testimonials-container">
+            <div class="testimonial-card glassmorphism">
+                <div class="testimonial-rating">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+                <div class="testimonial-image">
+                    <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Priya & Arjun">
+                </div>
+                <div class="testimonial-text">
+                    <p>"Eternally Yours turned our 500-guest wedding from a logistical nightmare into a seamless celebration. Our families were amazed at how smooth everything was."</p>
+                </div>
+                <div class="testimonial-author">
+                    <h4>Priya & Arjun</h4>
+                    <p>Delhi</p>
+                </div>
+            </div>
+            <div class="testimonial-card glassmorphism">
+                <div class="testimonial-rating">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+                <div class="testimonial-image">
+                    <img src="https://images.unsplash.com/photo-1609951651556-5334e2706168?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Meera & Raj">
+                </div>
+                <div class="testimonial-text">
+                    <p>"As a destination wedding in Udaipur, we were worried about coordinating guests from 5 different countries. This platform made it effortless."</p>
+                </div>
+                <div class="testimonial-author">
+                    <h4>Meera & Raj</h4>
+                    <p>Mumbai</p>
+                </div>
+            </div>
+            <div class="testimonial-card glassmorphism">
+                <div class="testimonial-rating">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+                <div class="testimonial-image">
+                    <img src="https://images.unsplash.com/photo-1565464027194-7957a2295fb7?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Ananya & Vikram">
+                </div>
+                <div class="testimonial-text">
+                    <p>"The family grouping feature was a game-changer. Our relatives from abroad stayed together throughout the events, making the experience special for everyone."</p>
+                </div>
+                <div class="testimonial-author">
+                    <h4>Ananya & Vikram</h4>
+                    <p>Bangalore</p>
+                </div>
+            </div>
+        </div>
+        <div class="stats-container">
+            <div class="stat">
+                <h3>10,000+</h3>
+                <p>Weddings Managed</p>
+            </div>
+            <div class="stat">
+                <h3>2.5M+</h3>
+                <p>Guests Coordinated</p>
+            </div>
+            <div class="stat">
+                <h3>98%</h3>
+                <p>Reduction in Planning Stress</p>
+            </div>
+            <div class="stat">
+                <h3>4.9/5</h3>
+                <p>Average Rating</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works-section">
+        <div class="section-header">
+            <h2>Your Wedding Journey Made Simple</h2>
+        </div>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Set Up Your Wedding</h3>
+                    <p>Create your wedding profile with events, venues, and key details in minutes</p>
+                </div>
+                <div class="step-image">
+                    <div class="setup-wizard"></div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Invite Your Guests</h3>
+                    <p>Import your guest list and send beautiful digital invitations with built-in RSVP tracking</p>
+                </div>
+                <div class="step-image">
+                    <div class="guest-management"></div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Manage Every Detail</h3>
+                    <p>Organize transportation, accommodations, and special requirements with our intuitive tools</p>
+                </div>
+                <div class="step-image">
+                    <div class="logistics-management"></div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Communicate with Ease</h3>
+                    <p>Send updates, reminders, and important information to specific guest groups automatically</p>
+                </div>
+                <div class="step-image">
+                    <div class="communication-center"></div>
+                </div>
+            </div>
+        </div>
+        <div class="section-cta">
+            <a href="#get-started" class="btn-primary">Begin Your Wedding Journey</a>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <div class="section-header">
+            <h2>Choose Your Perfect Plan</h2>
+            <p>Select the package that fits your celebration perfectly. All plans include our core features with different guest capacity and support levels.</p>
+        </div>
+        <div class="pricing-container">
+            <div class="pricing-card glassmorphism">
+                <h3>Intimate Celebration</h3>
+                <div class="price">
+                    <span class="currency">₹</span>
+                    <span class="amount">24,999</span>
+                </div>
+                <ul class="features-list">
+                    <li>Up to 150 guests</li>
+                    <li>All core features</li>
+                    <li>Email support</li>
+                </ul>
+                <a href="#get-started" class="btn-primary">Select Intimate Plan</a>
+            </div>
+            <div class="pricing-card glassmorphism popular">
+                <div class="popular-badge">Most Popular</div>
+                <h3>Grand Celebration</h3>
+                <div class="price">
+                    <span class="currency">₹</span>
+                    <span class="amount">39,999</span>
+                </div>
+                <ul class="features-list">
+                    <li>Up to 350 guests</li>
+                    <li>All core features</li>
+                    <li>Priority email & chat support</li>
+                    <li>Dedicated setup assistance</li>
+                </ul>
+                <a href="#get-started" class="btn-primary">Select Grand Plan</a>
+            </div>
+            <div class="pricing-card glassmorphism">
+                <h3>Royal Celebration</h3>
+                <div class="price">
+                    <span class="currency">₹</span>
+                    <span class="amount">74,999</span>
+                </div>
+                <ul class="features-list">
+                    <li>Unlimited guests</li>
+                    <li>All core features</li>
+                    <li>24/7 priority support</li>
+                    <li>Dedicated wedding success manager</li>
+                    <li>Custom feature development</li>
+                </ul>
+                <a href="#get-started" class="btn-primary">Select Royal Plan</a>
+            </div>
+        </div>
+        <div class="enterprise-option">
+            <p>Planning multiple weddings or a truly massive celebration?</p>
+            <a href="#contact" class="btn-secondary">Contact for Enterprise</a>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section id="get-started" class="final-cta-section">
+        <div class="section-header">
+            <h2>Begin Your Stress-Free Wedding Journey Today</h2>
+            <p>Join thousands of couples who transformed their wedding planning experience from chaos to celebration.</p>
+        </div>
+        <div class="cta-container">
+            <form class="contact-form glassmorphism">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="Bride/Groom Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="partner">Partner's Name</label>
+                        <input type="text" id="partner" name="partner" placeholder="Partner's Name" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Your Phone" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="wedding-date">Wedding Date</label>
+                        <input type="date" id="wedding-date" name="wedding-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="guests">Expected Guests</label>
+                        <select id="guests" name="guests" required>
+                            <option value="">Select</option>
+                            <option value="50-100">50-100</option>
+                            <option value="100-200">100-200</option>
+                            <option value="200-350">200-350</option>
+                            <option value="350+">350+</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn-primary">Start Your Free Trial</button>
+                </div>
+            </form>
+            <div class="trust-signals">
+                <div class="trust-item">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM12 11.99H19C18.47 16.11 15.72 19.78 12 20.93V12H5V6.3L12 3.19V11.99Z" fill="#FFD700"/>
+                    </svg>
+                    <p>30-day money-back guarantee</p>
+                </div>
+                <div class="trust-item">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM16.59 7.58L10 14.17L7.41 11.59L6 13L10 17L18 9L16.59 7.58Z" fill="#FFD700"/>
+                    </svg>
+                    <p>Secure payment processing</p>
+                </div>
+                <div class="trust-item">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 8H17V6C17 3.24 14.76 1 12 1C9.24 1 7 3.24 7 6V8H6C4.9 8 4 8.9 4 10V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V10C20 8.9 19.1 8 18 8ZM12 17C10.9 17 10 16.1 10 15C10 13.9 10.9 13 12 13C13.1 13 14 13.9 14 15C14 16.1 13.1 17 12 17ZM15.1 8H8.9V6C8.9 4.29 10.29 2.9 12 2.9C13.71 2.9 15.1 4.29 15.1 6V8Z" fill="#FFD700"/>
+                    </svg>
+                    <p>Data privacy commitment</p>
+                </div>
+                <div class="trust-item">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 1C7.03 1 3 5.03 3 10V17C3 18.66 4.34 20 6 20H9V12H5V10C5 6.13 8.13 3 12 3C15.87 3 19 6.13 19 10V12H15V20H18C19.66 20 21 18.66 21 17V10C21 5.03 16.97 1 12 1Z" fill="#FFD700"/>
+                        <path d="M7 12H9V20H7V12Z" fill="#FFD700"/>
+                        <path d="M15 12H17V20H15V12Z" fill="#FFD700"/>
+                    </svg>
+                    <p>24/7 support availability</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>Eternally Yours</h2>
+                <p>Transform Your Indian Wedding Journey</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#testimonials">Success Stories</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>Email: hello@eternallyyoursrsvp.in</li>
+                        <li>Phone: +91 98765 43210</li>
+                        <li>WhatsApp: +91 98765 43210</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Social Media</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" fill="#FFD700"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" fill="#FFD700"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" fill="#FFD700"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.441 16.892c-2.102.144-6.784.144-8.883 0-2.276-.156-2.541-1.27-2.558-4.892.017-3.629.285-4.736 2.558-4.892 2.099-.144 6.782-.144 8.883 0 2.277.156 2.541 1.27 2.559 4.892-.018 3.629-.285 4.736-2.559 4.892zm-6.441-7.234l4.917 2.338-4.917 2.346v-4.684z" fill="#FFD700"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="legal-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Refund Policy</a>
+            </div>
+            <p class="copyright">© 2025 Eternally Yours. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</body>
+</html>
