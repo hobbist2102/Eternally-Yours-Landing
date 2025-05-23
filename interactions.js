@@ -1,462 +1,353 @@
-// interactions.js - Advanced interactive elements for Eternally Yours
-// This script handles all user interactions, 3D card effects, and
-// sophisticated UI behaviors throughout the site
+// interactions.js - Advanced interactive elements for eternallyyoursrsvp.in
+// Implements 3D card effects, magnetic buttons, and custom interactions
 
-class InteractionSystem {
-  constructor() {
-    // Store interactive elements
-    this.cards3D = [];
-    this.magneticElements = [];
-    
-    // Interaction configuration
-    this.config = {
-      cardTiltMaxDegree: 10,
-      cardTiltPerspective: 1000,
-      cardTiltSpeed: 400,
-      cardTiltScale: 1.05,
-      magneticStrength: 0.3,
-      magneticRadius: 100,
-      magneticLerp: 0.2
-    };
-    
-    // Mouse position
-    this.mouse = {
-      x: 0,
-      y: 0,
-      lastX: 0,
-      lastY: 0,
-      velocity: { x: 0, y: 0 }
-    };
-    
-    // Initialize
-    this.init();
-  }
+// Initialize interactions when document is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Interactions will be initialized after loading screen completes
+});
+
+// Main interactions initialization
+function initInteractions() {
+  initTransportVisualization();
+  initWhatsAppInteractions();
+  initScrollIndicator();
+  initFormInteractions();
+}
+
+// Transport visualization with animated routes and vehicles
+function initTransportVisualization() {
+  const mapContainer = document.querySelector('.map-container');
+  if (!mapContainer) return;
   
-  init() {
-    // Initialize once DOM is loaded
-    window.addEventListener('load', () => {
-      this.setupEventListeners();
-      this.setup3DCards();
-      this.setupMagneticElements();
-      this.setupNavigation();
-      this.setupScrollIndicator();
+  // Create animated particles for routes
+  const routes = document.querySelectorAll('.route');
+  
+  routes.forEach(route => {
+    // Create particles for each route
+    for (let i = 0; i < 10; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('route-particle');
+      
+      // Random starting position along the route
+      const position = Math.random() * 100;
+      particle.style.left = `${position}%`;
+      
+      // Random size and opacity
+      const size = Math.random() * 4 + 2;
+      const opacity = Math.random() * 0.5 + 0.3;
+      
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.opacity = opacity;
+      
+      // Animation duration
+      const duration = Math.random() * 5 + 5;
+      particle.style.animationDuration = `${duration}s`;
+      
+      // Add to route
+      route.appendChild(particle);
+    }
+  });
+  
+  // Animate vehicles along routes
+  const vehicles = document.querySelectorAll('.vehicle');
+  
+  vehicles.forEach(vehicle => {
+    // Add pulse animation to vehicles
+    vehicle.classList.add('animate-pulse');
+    
+    // Create vehicle trail effect
+    const trail = document.createElement('div');
+    trail.classList.add('vehicle-trail');
+    vehicle.appendChild(trail);
+  });
+  
+  // Interactive hover effects for locations
+  const locations = document.querySelectorAll('.location');
+  
+  locations.forEach(location => {
+    location.addEventListener('mouseenter', () => {
+      location.classList.add('location-highlight');
     });
-  }
-  
-  setupEventListeners() {
-    // Track mouse position
-    document.addEventListener('mousemove', this.onMouseMove.bind(this));
     
-    // Update on scroll
-    window.addEventListener('scroll', this.onScroll.bind(this));
-    
-    // Handle resize
-    window.addEventListener('resize', this.onResize.bind(this));
-    
-    // Start animation loop
-    this.animate();
-  }
-  
-  onMouseMove(event) {
-    // Store previous position
-    this.mouse.lastX = this.mouse.x;
-    this.mouse.lastY = this.mouse.y;
-    
-    // Update current position
-    this.mouse.x = event.clientX;
-    this.mouse.y = event.clientY;
-    
-    // Calculate velocity
-    this.mouse.velocity.x = this.mouse.x - this.mouse.lastX;
-    this.mouse.velocity.y = this.mouse.y - this.mouse.lastY;
-  }
-  
-  onScroll() {
-    // Update navigation state
-    this.updateNavigation();
-    
-    // Update scroll-dependent interactions
-    this.updateScrollInteractions();
-  }
-  
-  onResize() {
-    // Update card positions and dimensions
-    this.updateCardDimensions();
-  }
-  
-  setup3DCards() {
-    // Find all elements with 3D card effect
-    const cardElements = [
-      ...document.querySelectorAll('.feature-card'),
-      ...document.querySelectorAll('.challenge-card')
-    ];
-    
-    // Initialize each card
-    cardElements.forEach(card => {
-      // Create card object
-      const cardObj = {
-        element: card,
-        rect: card.getBoundingClientRect(),
-        centerX: 0,
-        centerY: 0,
-        targetRotateX: 0,
-        targetRotateY: 0,
-        currentRotateX: 0,
-        currentRotateY: 0,
-        targetScale: 1,
-        currentScale: 1,
-        isHovered: false
-      };
-      
-      // Calculate center position
-      this.updateCardCenter(cardObj);
-      
-      // Add event listeners
-      card.addEventListener('mouseenter', () => this.onCardEnter(cardObj));
-      card.addEventListener('mouseleave', () => this.onCardLeave(cardObj));
-      card.addEventListener('mousemove', (e) => this.onCardMove(e, cardObj));
-      
-      // Add to cards array
-      this.cards3D.push(cardObj);
+    location.addEventListener('mouseleave', () => {
+      location.classList.remove('location-highlight');
     });
-  }
+  });
+}
+
+// WhatsApp interface interactions
+function initWhatsAppInteractions() {
+  const whatsappFrame = document.querySelector('.whatsapp-frame');
+  if (!whatsappFrame) return;
   
-  updateCardCenter(card) {
-    // Update card dimensions
-    card.rect = card.element.getBoundingClientRect();
-    
-    // Calculate center position
-    card.centerX = card.rect.left + card.rect.width / 2;
-    card.centerY = card.rect.top + card.rect.height / 2;
-  }
+  // Simulate typing in input field
+  const inputField = whatsappFrame.querySelector('.input-field input');
+  const sendButton = whatsappFrame.querySelector('.input-send');
   
-  updateCardDimensions() {
-    // Update all card dimensions
-    this.cards3D.forEach(card => {
-      this.updateCardCenter(card);
+  if (inputField && sendButton) {
+    // Focus input on click
+    inputField.addEventListener('click', () => {
+      inputField.focus();
     });
-  }
-  
-  onCardEnter(card) {
-    // Set hovered state
-    card.isHovered = true;
     
-    // Set initial target scale
-    card.targetScale = this.config.cardTiltScale;
-    
-    // Add active class
-    card.element.classList.add('card-active');
-  }
-  
-  onCardLeave(card) {
-    // Reset hovered state
-    card.isHovered = false;
-    
-    // Reset target rotation and scale
-    card.targetRotateX = 0;
-    card.targetRotateY = 0;
-    card.targetScale = 1;
-    
-    // Remove active class
-    card.element.classList.remove('card-active');
-  }
-  
-  onCardMove(event, card) {
-    if (!card.isHovered) return;
-    
-    // Calculate mouse position relative to card center
-    const mouseX = event.clientX - card.centerX;
-    const mouseY = event.clientY - card.centerY;
-    
-    // Calculate rotation based on mouse position
-    // Invert Y axis for natural tilt effect
-    card.targetRotateY = mouseX / card.rect.width * this.config.cardTiltMaxDegree;
-    card.targetRotateX = -mouseY / card.rect.height * this.config.cardTiltMaxDegree;
-  }
-  
-  updateCards() {
-    // Update each card's rotation and scale with smooth interpolation
-    this.cards3D.forEach(card => {
-      // Smoothly interpolate rotation
-      card.currentRotateX += (card.targetRotateX - card.currentRotateX) / this.config.cardTiltSpeed;
-      card.currentRotateY += (card.targetRotateY - card.currentRotateY) / this.config.cardTiltSpeed;
-      
-      // Smoothly interpolate scale
-      card.currentScale += (card.targetScale - card.currentScale) / this.config.cardTiltSpeed;
-      
-      // Apply transform
-      card.element.style.transform = `
-        perspective(${this.config.cardTiltPerspective}px)
-        rotateX(${card.currentRotateX}deg)
-        rotateY(${card.currentRotateY}deg)
-        scale3d(${card.currentScale}, ${card.currentScale}, ${card.currentScale})
-      `;
-    });
-  }
-  
-  setupMagneticElements() {
-    // Find all elements with magnetic effect
-    const magneticElements = document.querySelectorAll('.btn-primary, .btn-large');
-    
-    // Initialize each magnetic element
-    magneticElements.forEach(element => {
-      // Create magnetic object
-      const magneticObj = {
-        element: element,
-        rect: element.getBoundingClientRect(),
-        centerX: 0,
-        centerY: 0,
-        targetX: 0,
-        targetY: 0,
-        currentX: 0,
-        currentY: 0,
-        isActive: false
-      };
-      
-      // Calculate center position
-      this.updateMagneticCenter(magneticObj);
-      
-      // Add to magnetic elements array
-      this.magneticElements.push(magneticObj);
-    });
-  }
-  
-  updateMagneticCenter(magnetic) {
-    // Update dimensions
-    magnetic.rect = magnetic.element.getBoundingClientRect();
-    
-    // Calculate center position
-    magnetic.centerX = magnetic.rect.left + magnetic.rect.width / 2;
-    magnetic.centerY = magnetic.rect.top + magnetic.rect.height / 2;
-  }
-  
-  updateMagneticElements() {
-    // Update each magnetic element
-    this.magneticElements.forEach(magnetic => {
-      // Update center position
-      this.updateMagneticCenter(magnetic);
-      
-      // Calculate distance from mouse to element center
-      const distX = this.mouse.x - magnetic.centerX;
-      const distY = this.mouse.y - magnetic.centerY;
-      const distance = Math.sqrt(distX * distX + distY * distY);
-      
-      // Check if mouse is within magnetic radius
-      if (distance < this.config.magneticRadius) {
-        // Element is active
-        magnetic.isActive = true;
-        
-        // Calculate magnetic pull (stronger when closer)
-        const pull = (this.config.magneticRadius - distance) / this.config.magneticRadius;
-        
-        // Set target position with magnetic pull
-        magnetic.targetX = distX * pull * this.config.magneticStrength;
-        magnetic.targetY = distY * pull * this.config.magneticStrength;
-      } else if (magnetic.isActive) {
-        // Reset target position when mouse leaves radius
-        magnetic.isActive = false;
-        magnetic.targetX = 0;
-        magnetic.targetY = 0;
+    // Send message on enter or button click
+    inputField.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' && inputField.value.trim() !== '') {
+        sendMessage(inputField.value);
+        inputField.value = '';
       }
-      
-      // Smoothly interpolate position
-      magnetic.currentX += (magnetic.targetX - magnetic.currentX) * this.config.magneticLerp;
-      magnetic.currentY += (magnetic.targetY - magnetic.currentY) * this.config.magneticLerp;
-      
-      // Apply transform if there's movement
-      if (Math.abs(magnetic.currentX) > 0.01 || Math.abs(magnetic.currentY) > 0.01) {
-        magnetic.element.style.transform = `translate(${magnetic.currentX}px, ${magnetic.currentY}px)`;
-      } else {
-        magnetic.element.style.transform = '';
+    });
+    
+    sendButton.addEventListener('click', () => {
+      if (inputField.value.trim() !== '') {
+        sendMessage(inputField.value);
+        inputField.value = '';
       }
     });
   }
   
-  setupNavigation() {
-    const nav = document.querySelector('.main-navigation');
-    const navLinks = document.querySelectorAll('.nav-link');
-    const navToggle = document.querySelector('.nav-toggle');
-    const navLinksContainer = document.querySelector('.nav-links');
+  // Function to add new message to chat
+  function sendMessage(text) {
+    const messageBubbles = document.querySelector('.message-bubbles');
     
-    if (!nav || !navLinks.length) return;
+    // Create new message element
+    const newMessage = document.createElement('div');
+    newMessage.classList.add('message-bubble', 'guest');
     
-    // Handle navigation toggle for mobile
-    if (navToggle && navLinksContainer) {
-      navToggle.addEventListener('click', () => {
-        navLinksContainer.classList.toggle('active');
-        navToggle.classList.toggle('active');
+    // Message content
+    const messageContent = document.createElement('div');
+    messageContent.classList.add('message-content');
+    messageContent.innerHTML = `<p>${text}</p>`;
+    
+    // Message time
+    const messageTime = document.createElement('div');
+    messageTime.classList.add('message-time');
+    
+    // Get current time
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    
+    messageTime.textContent = `${hours}:${minutes}`;
+    
+    // Assemble message
+    newMessage.appendChild(messageContent);
+    newMessage.appendChild(messageTime);
+    
+    // Add to chat
+    messageBubbles.appendChild(newMessage);
+    
+    // Scroll to bottom
+    messageBubbles.scrollTop = messageBubbles.scrollHeight;
+    
+    // Simulate response after delay
+    setTimeout(() => {
+      // Show typing indicator
+      const typingIndicator = document.createElement('div');
+      typingIndicator.classList.add('typing-indicator');
+      typingIndicator.innerHTML = '<span></span><span></span><span></span>';
+      
+      messageBubbles.appendChild(typingIndicator);
+      messageBubbles.scrollTop = messageBubbles.scrollHeight;
+      
+      // Hide typing indicator and show response after delay
+      setTimeout(() => {
+        typingIndicator.remove();
+        
+        // Create response message
+        const responseMessage = document.createElement('div');
+        responseMessage.classList.add('message-bubble', 'host');
+        
+        // Response content
+        const responseContent = document.createElement('div');
+        responseContent.classList.add('message-content');
+        responseContent.innerHTML = `<p>Thank you for your message! Our team will assist you shortly with your wedding transportation needs.</p>`;
+        
+        // Response time
+        const responseTime = document.createElement('div');
+        responseTime.classList.add('message-time');
+        
+        // Get current time
+        const responseNow = new Date();
+        const responseHours = responseNow.getHours().toString().padStart(2, '0');
+        const responseMinutes = responseNow.getMinutes().toString().padStart(2, '0');
+        
+        responseTime.innerHTML = `${responseHours}:${responseMinutes} <i class="fas fa-check-double"></i>`;
+        
+        // Assemble response
+        responseMessage.appendChild(responseContent);
+        responseMessage.appendChild(responseTime);
+        
+        // Add to chat
+        messageBubbles.appendChild(responseMessage);
+        
+        // Scroll to bottom
+        messageBubbles.scrollTop = messageBubbles.scrollHeight;
+      }, 2000);
+    }, 1000);
+  }
+}
+
+// Scroll indicator animation and interaction
+function initScrollIndicator() {
+  const scrollIndicator = document.querySelector('.scroll-indicator');
+  if (!scrollIndicator) return;
+  
+  scrollIndicator.addEventListener('click', () => {
+    // Scroll to next section
+    const heroSection = document.querySelector('.hero-section');
+    const nextSection = heroSection.nextElementSibling;
+    
+    if (nextSection) {
+      window.scrollTo({
+        top: nextSection.offsetTop,
+        behavior: 'smooth'
       });
     }
-    
-    // Handle smooth scrolling for navigation links
-    navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        // Get the target section
-        const targetId = link.getAttribute('href');
-        if (targetId && targetId.startsWith('#')) {
-          e.preventDefault();
-          
-          const targetSection = document.querySelector(targetId);
-          if (targetSection) {
-            // Close mobile menu if open
-            if (navLinksContainer && navLinksContainer.classList.contains('active')) {
-              navLinksContainer.classList.remove('active');
-              navToggle.classList.remove('active');
-            }
-            
-            // Smooth scroll to target
-            window.scrollTo({
-              top: targetSection.offsetTop - 80, // Offset for fixed header
-              behavior: 'smooth'
-            });
-            
-            // Update URL without scrolling
-            history.pushState(null, null, targetId);
-          }
-        }
-      });
-    });
-    
-    // Initial navigation update
-    this.updateNavigation();
-  }
+  });
   
-  updateNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    const scrollPosition = window.scrollY + 100; // Offset for better detection
-    
-    // Find the current section
-    navLinks.forEach(link => {
-      const targetId = link.getAttribute('href');
-      if (targetId && targetId.startsWith('#') && targetId !== '#') {
-        const targetSection = document.querySelector(targetId);
-        
-        if (targetSection) {
-          const sectionTop = targetSection.offsetTop;
-          const sectionHeight = targetSection.offsetHeight;
-          
-          // Check if current scroll position is within this section
-          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            // Add active class to current section link
-            link.classList.add('active');
-          } else {
-            // Remove active class from other links
-            link.classList.remove('active');
-          }
-        }
-      }
-    });
-  }
-  
-  setupScrollIndicator() {
-    const scrollIndicator = document.querySelector('.scroll-indicator');
-    
-    if (!scrollIndicator) return;
-    
-    // Add click event to scroll to next section
-    scrollIndicator.addEventListener('click', () => {
-      const heroSection = document.querySelector('.hero-section');
-      const nextSection = heroSection.nextElementSibling;
-      
-      if (nextSection) {
-        window.scrollTo({
-          top: nextSection.offsetTop - 80, // Offset for fixed header
-          behavior: 'smooth'
-        });
-      }
-    });
-  }
-  
-  updateScrollInteractions() {
-    // Get scroll progress
-    const scrollProgress = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-    
-    // Update any scroll-dependent interactions here
-    // For example, parallax effects, progress indicators, etc.
-  }
-  
-  animate() {
-    // Update 3D cards
-    this.updateCards();
-    
-    // Update magnetic elements
-    this.updateMagneticElements();
-    
-    // Continue animation loop
-    requestAnimationFrame(this.animate.bind(this));
-  }
+  // Hide scroll indicator when scrolling down
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+      scrollIndicator.style.opacity = '0';
+      scrollIndicator.style.pointerEvents = 'none';
+    } else {
+      scrollIndicator.style.opacity = '0.7';
+      scrollIndicator.style.pointerEvents = 'auto';
+    }
+  });
 }
 
-// Initialize when the DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  window.interactionSystem = new InteractionSystem();
-});
-
-// Main.js - Primary script for Eternally Yours
-// This script initializes all systems and handles global functionality
-
-document.addEventListener('DOMContentLoaded', () => {
-  // Initialize navigation functionality
-  initNavigation();
-  
-  // Initialize form validation and submission
-  initForms();
-});
-
-function initNavigation() {
-  const nav = document.querySelector('.main-navigation');
-  
-  // Handle navigation visibility on scroll
-  if (nav) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
-    });
-  }
-}
-
-function initForms() {
+// Form interactions and validation
+function initFormInteractions() {
   const forms = document.querySelectorAll('form');
   
   forms.forEach(form => {
+    const inputs = form.querySelectorAll('input, textarea');
+    
+    inputs.forEach(input => {
+      // Label animation
+      const label = input.previousElementSibling;
+      
+      if (label && label.tagName === 'LABEL') {
+        // Initial state check
+        if (input.value !== '') {
+          label.classList.add('active');
+        }
+        
+        // Focus event
+        input.addEventListener('focus', () => {
+          label.classList.add('active');
+        });
+        
+        // Blur event
+        input.addEventListener('blur', () => {
+          if (input.value === '') {
+            label.classList.remove('active');
+          }
+        });
+      }
+      
+      // Input validation
+      input.addEventListener('input', () => {
+        validateInput(input);
+      });
+    });
+    
+    // Form submission
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       
-      // Simple validation
+      // Validate all inputs
       let isValid = true;
-      const requiredFields = form.querySelectorAll('[required]');
       
-      requiredFields.forEach(field => {
-        if (!field.value.trim()) {
+      inputs.forEach(input => {
+        if (!validateInput(input)) {
           isValid = false;
-          field.classList.add('error');
-        } else {
-          field.classList.remove('error');
         }
       });
       
       if (isValid) {
         // Show success message
-        const submitButton = form.querySelector('[type="submit"]');
-        const originalText = submitButton.textContent;
+        const successMessage = document.createElement('div');
+        successMessage.classList.add('form-success');
+        successMessage.textContent = 'Thank you! Your message has been sent successfully.';
         
-        submitButton.disabled = true;
-        submitButton.textContent = 'Sending...';
+        form.appendChild(successMessage);
         
-        // Simulate form submission
+        // Reset form after delay
         setTimeout(() => {
           form.reset();
-          submitButton.textContent = 'Sent Successfully!';
+          successMessage.remove();
           
-          setTimeout(() => {
-            submitButton.disabled = false;
-            submitButton.textContent = originalText;
-          }, 2000);
-        }, 1500);
+          // Reset labels
+          const labels = form.querySelectorAll('label');
+          labels.forEach(label => {
+            label.classList.remove('active');
+          });
+        }, 3000);
       }
     });
   });
+  
+  // Input validation function
+  function validateInput(input) {
+    const value = input.value.trim();
+    const type = input.type;
+    const required = input.hasAttribute('required');
+    
+    // Clear previous error
+    const errorElement = input.nextElementSibling;
+    if (errorElement && errorElement.classList.contains('input-error')) {
+      errorElement.remove();
+    }
+    
+    // Check if required field is empty
+    if (required && value === '') {
+      showError(input, 'This field is required');
+      return false;
+    }
+    
+    // Email validation
+    if (type === 'email' && value !== '') {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(value)) {
+        showError(input, 'Please enter a valid email address');
+        return false;
+      }
+    }
+    
+    // Phone validation
+    if (type === 'tel' && value !== '') {
+      const phoneRegex = /^\+?[0-9\s\-\(\)]{8,20}$/;
+      if (!phoneRegex.test(value)) {
+        showError(input, 'Please enter a valid phone number');
+        return false;
+      }
+    }
+    
+    return true;
+  }
+  
+  // Show error message
+  function showError(input, message) {
+    const errorElement = document.createElement('div');
+    errorElement.classList.add('input-error');
+    errorElement.textContent = message;
+    
+    // Insert after input
+    input.parentNode.insertBefore(errorElement, input.nextSibling);
+    
+    // Highlight input
+    input.classList.add('input-invalid');
+    
+    // Remove error on input
+    input.addEventListener('input', () => {
+      input.classList.remove('input-invalid');
+      if (errorElement.parentNode) {
+        errorElement.remove();
+      }
+    }, { once: true });
+  }
 }
