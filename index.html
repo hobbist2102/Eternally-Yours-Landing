@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eternally Yours | Where Love's Journey Begins</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="css/main.css">
     <link href="https://fonts.cdnfonts.com/css/good-vibes" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" href="data:,">
 </head>
 <body>
@@ -55,6 +56,10 @@
 
         <!-- Hero Section - Act 1: The Invitation -->
         <section class="hero-section" id="hero">
+            <div class="parallax-layer layer-1"></div>
+            <div class="parallax-layer layer-2"></div>
+            <div class="parallax-layer layer-3"></div>
+            
             <div class="hero-content">
                 <h1 class="hero-title">
                     <span class="title-line">Where Love's</span>
@@ -85,28 +90,36 @@
                     
                     <div class="challenge-cards">
                         <div class="challenge-card" data-index="1">
-                            <div class="card-icon"></div>
+                            <div class="card-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
                             <div class="card-content">
                                 <h3 class="card-title">The Joy Without Overwhelm</h3>
                                 <p class="card-description">Receive RSVPs from hundreds of loved ones, without the stress of tracking them</p>
                             </div>
                         </div>
                         <div class="challenge-card" data-index="2">
-                            <div class="card-icon"></div>
+                            <div class="card-icon">
+                                <i class="fas fa-music"></i>
+                            </div>
                             <div class="card-content">
                                 <h3 class="card-title">Perfect Harmony, No Spreadsheets</h3>
                                 <p class="card-description">Orchestrate complex logistics with elegance, not endless documents</p>
                             </div>
                         </div>
                         <div class="challenge-card" data-index="3">
-                            <div class="card-icon"></div>
+                            <div class="card-icon">
+                                <i class="fas fa-car-side"></i>
+                            </div>
                             <div class="card-content">
                                 <h3 class="card-title">Seamless Family Arrivals</h3>
                                 <p class="card-description">Coordinate transportation with grace, keeping families together</p>
                             </div>
                         </div>
                         <div class="challenge-card" data-index="4">
-                            <div class="card-icon"></div>
+                            <div class="card-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
                             <div class="card-content">
                                 <h3 class="card-title">Personal Connections</h3>
                                 <p class="card-description">Maintain intimate communication with every guest, without missing a detail</p>
@@ -128,43 +141,47 @@
                     <p class="section-description">Designed with the romance and significance of your celebration in mind, our platform transforms wedding planning from overwhelming to inspiring. Every feature has been crafted to honor the emotional journey of your wedding, ensuring that you can be fully present for every precious moment.</p>
                     
                     <div class="features-showcase">
-                        <div class="feature-card" data-feature="dashboard">
-                            <div class="feature-content">
-                                <h3 class="feature-title">One Dashboard, Total Harmony</h3>
-                                <p class="feature-description">A unified experience where every detail of your celebration flows together in perfect synchronicity</p>
+                        <div class="feature-row">
+                            <div class="feature-card" data-feature="dashboard">
+                                <div class="feature-icon">
+                                    <i class="fas fa-th-large"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h3 class="feature-title">One Dashboard, Total Harmony</h3>
+                                    <p class="feature-description">A unified experience where every detail of your celebration flows together in perfect synchronicity</p>
+                                </div>
                             </div>
-                            <div class="feature-visual">
-                                <!-- 3D Card with WebGL effects will be rendered here -->
-                            </div>
-                        </div>
-                        
-                        <div class="feature-card" data-feature="family">
-                            <div class="feature-content">
-                                <h3 class="feature-title">Family-Centered Design</h3>
-                                <p class="feature-description">Keeping loved ones connected throughout your celebration, honoring the relationships that matter most</p>
-                            </div>
-                            <div class="feature-visual">
-                                <!-- 3D Card with WebGL effects will be rendered here -->
-                            </div>
-                        </div>
-                        
-                        <div class="feature-card" data-feature="journey">
-                            <div class="feature-content">
-                                <h3 class="feature-title">From Promise to Forever</h3>
-                                <p class="feature-description">Guiding your journey from engagement to honeymoon with intuitive grace and sophistication</p>
-                            </div>
-                            <div class="feature-visual">
-                                <!-- 3D Card with WebGL effects will be rendered here -->
+                            
+                            <div class="feature-card" data-feature="family">
+                                <div class="feature-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h3 class="feature-title">Family-Centered Design</h3>
+                                    <p class="feature-description">Keeping loved ones connected throughout your celebration, honoring the relationships that matter most</p>
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="feature-card" data-feature="communication">
-                            <div class="feature-content">
-                                <h3 class="feature-title">Seamless Connection</h3>
-                                <p class="feature-description">Maintaining the personal touch in every communication, preserving the intimacy of your celebration</p>
+                        <div class="feature-row">
+                            <div class="feature-card" data-feature="journey">
+                                <div class="feature-icon">
+                                    <i class="fas fa-map-marked-alt"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h3 class="feature-title">From Promise to Forever</h3>
+                                    <p class="feature-description">Guiding your journey from engagement to honeymoon with intuitive grace and sophistication</p>
+                                </div>
                             </div>
-                            <div class="feature-visual">
-                                <!-- 3D Card with WebGL effects will be rendered here -->
+                            
+                            <div class="feature-card" data-feature="communication">
+                                <div class="feature-icon">
+                                    <i class="fas fa-comment-dots"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h3 class="feature-title">Seamless Connection</h3>
+                                    <p class="feature-description">Maintaining the personal touch in every communication, preserving the intimacy of your celebration</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -183,30 +200,82 @@
                     <p class="section-description">Your celebration brings together the most important people in your lives. Our revolutionary transportation system ensures they move through your wedding journey with the same care and attention you've put into every other detail.</p>
                     
                     <div class="transport-visualization">
-                        <!-- WebGL-powered transport visualization will be rendered here -->
+                        <div class="transport-map">
+                            <div class="map-container">
+                                <div class="map-background"></div>
+                                <div class="map-routes">
+                                    <div class="route route-1"></div>
+                                    <div class="route route-2"></div>
+                                    <div class="route route-3"></div>
+                                </div>
+                                <div class="map-vehicles">
+                                    <div class="vehicle vehicle-1" data-family="Sharma">
+                                        <i class="fas fa-car-side"></i>
+                                        <div class="vehicle-label">Sharma Family</div>
+                                    </div>
+                                    <div class="vehicle vehicle-2" data-family="Patel">
+                                        <i class="fas fa-car-side"></i>
+                                        <div class="vehicle-label">Patel Family</div>
+                                    </div>
+                                    <div class="vehicle vehicle-3" data-family="Singh">
+                                        <i class="fas fa-car-side"></i>
+                                        <div class="vehicle-label">Singh Family</div>
+                                    </div>
+                                </div>
+                                <div class="map-locations">
+                                    <div class="location location-hotel">
+                                        <i class="fas fa-hotel"></i>
+                                        <div class="location-label">JW Marriott</div>
+                                    </div>
+                                    <div class="location location-venue">
+                                        <i class="fas fa-place-of-worship"></i>
+                                        <div class="location-label">Venue</div>
+                                    </div>
+                                </div>
+                                <div class="map-timeline">
+                                    <div class="timeline-marker" data-time="5:00 PM">
+                                        <div class="marker-label">5:00 PM</div>
+                                    </div>
+                                    <div class="timeline-marker" data-time="5:30 PM">
+                                        <div class="marker-label">5:30 PM</div>
+                                    </div>
+                                    <div class="timeline-marker" data-time="6:00 PM">
+                                        <div class="marker-label">6:00 PM</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="transport-features">
                         <div class="transport-feature">
-                            <div class="feature-icon"></div>
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
                             <h3 class="feature-title">Family-Centric Transportation</h3>
                             <p class="feature-description">Ensuring your loved ones remain together, sharing in the journey as they've shared in your lives</p>
                         </div>
                         
                         <div class="transport-feature">
-                            <div class="feature-icon"></div>
+                            <div class="feature-icon">
+                                <i class="fas fa-route"></i>
+                            </div>
                             <h3 class="feature-title">Smart Fleet Orchestration</h3>
                             <p class="feature-description">Elegant coordination of vehicles that reflects the sophistication of your celebration</p>
                         </div>
                         
                         <div class="transport-feature">
-                            <div class="feature-icon"></div>
+                            <div class="feature-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
                             <h3 class="feature-title">Arrival Harmony</h3>
                             <p class="feature-description">Perfectly timed arrivals that create a seamless flow of joy and celebration</p>
                         </div>
                         
                         <div class="transport-feature">
-                            <div class="feature-icon"></div>
+                            <div class="feature-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
                             <h3 class="feature-title">Effortless Updates</h3>
                             <p class="feature-description">Keeping everyone informed with the grace and attention they deserve</p>
                         </div>
@@ -225,37 +294,94 @@
                     <p class="section-description">Your wedding is more than an event—it's a chapter in your love story. Our communication tools ensure that every guest feels connected to this narrative, creating a shared experience that begins long before the celebration and continues well after.</p>
                     
                     <div class="communication-showcase">
-                        <!-- Interactive communication visualization will be rendered here -->
-                        <div class="message-bubbles">
-                            <div class="message-bubble host">
-                                <div class="message-content">
-                                    <p>Namaste Priya! We're excited to welcome you to Raj & Anita's wedding celebration. Your RSVP has been confirmed for all 3 days of ceremonies.</p>
-                                </div>
-                            </div>
-                            <div class="message-bubble guest">
-                                <div class="message-content">
-                                    <p>Thank you! I'm looking forward to it. Will there be transportation from the hotel to the venue?</p>
-                                </div>
-                            </div>
-                            <div class="message-bubble host">
-                                <div class="message-content">
-                                    <p>Yes! We've arranged transportation for you. A car will pick you up from JW Marriott at 5:30 PM on Friday. We've made sure you'll be with your family members.</p>
-                                </div>
-                            </div>
-                            <div class="message-bubble host">
-                                <div class="message-content">
-                                    <p>Here are the transportation details:</p>
-                                    <div class="transport-details">
-                                        <h4>🚗 Your Transport Details</h4>
-                                        <p>Date: June 17, 2025</p>
-                                        <p>Pickup: JW Marriott, 5:30 PM</p>
-                                        <p>Vehicle: White Innova (Sharma Family )</p>
+                        <div class="whatsapp-frame">
+                            <div class="phone-frame">
+                                <div class="phone-header">
+                                    <div class="phone-status-bar">
+                                        <div class="status-time">5:42 PM</div>
+                                        <div class="status-icons">
+                                            <i class="fas fa-wifi"></i>
+                                            <i class="fas fa-battery-three-quarters"></i>
+                                        </div>
+                                    </div>
+                                    <div class="chat-header">
+                                        <div class="chat-back">
+                                            <i class="fas fa-arrow-left"></i>
+                                        </div>
+                                        <div class="chat-contact">
+                                            <div class="contact-avatar">
+                                                <img src="images/avatar.jpg" alt="Raj & Anita Wedding" onerror="this.src='data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 viewBox%3D%220 0 64 64%22%3E%3Ccircle cx%3D%2232%22 cy%3D%2232%22 r%3D%2232%22 fill%3D%22%23dfe5e7%22%2F%3E%3Cpath d%3D%22M32 36.8c5.5 0 10-4.5 10-10s-4.5-10-10-10-10 4.5-10 10 4.5 10 10 10zm16.3 3.7c-.8-1.3-2-2.3-3.5-2.8-4.3-1.5-8.7-2.3-13.2-2.3-4.4 0-8.9.8-13.2 2.3-1.5.5-2.7 1.6-3.5 2.8-1.5 2.4-2.4 5.2-2.4 8.3v1.7c0 2.6 2.1 4.7 4.7 4.7h28.6c2.6 0 4.7-2.1 4.7-4.7V48c.2-3-.7-5.8-2.2-8.2z%22 fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E';">
+                                            </div>
+                                            <div class="contact-info">
+                                                <div class="contact-name">Raj & Anita Wedding</div>
+                                                <div class="contact-status">online</div>
+                                            </div>
+                                        </div>
+                                        <div class="chat-actions">
+                                            <i class="fas fa-video"></i>
+                                            <i class="fas fa-phone"></i>
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="message-bubble guest">
-                                <div class="message-content">
-                                    <p>Perfect! Thank you for organizing this so well.</p>
+                                <div class="phone-content">
+                                    <div class="chat-background"></div>
+                                    <div class="message-bubbles">
+                                        <div class="message-date">Today</div>
+                                        <div class="message-bubble host">
+                                            <div class="message-content">
+                                                <p>Namaste Priya! We're excited to welcome you to Raj & Anita's wedding celebration. Your RSVP has been confirmed for all 3 days of ceremonies.</p>
+                                                <div class="message-time">5:30 PM <i class="fas fa-check-double"></i></div>
+                                            </div>
+                                        </div>
+                                        <div class="message-bubble guest">
+                                            <div class="message-content">
+                                                <p>Thank you! I'm looking forward to it. Will there be transportation from the hotel to the venue?</p>
+                                                <div class="message-time">5:32 PM</div>
+                                            </div>
+                                        </div>
+                                        <div class="typing-indicator">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                        <div class="message-bubble host">
+                                            <div class="message-content">
+                                                <p>Yes! We've arranged transportation for you. A car will pick you up from JW Marriott at 5:30 PM on Friday. We've made sure you'll be with your family members.</p>
+                                                <div class="message-time">5:34 PM <i class="fas fa-check-double"></i></div>
+                                            </div>
+                                        </div>
+                                        <div class="message-bubble host">
+                                            <div class="message-content">
+                                                <p>Here are the transportation details:</p>
+                                                <div class="transport-details">
+                                                    <h4>🚗 Your Transport Details</h4>
+                                                    <p>Date: June 17, 2025</p>
+                                                    <p>Pickup: JW Marriott, 5:30 PM</p>
+                                                    <p>Vehicle: White Innova (Sharma Family)</p>
+                                                </div>
+                                                <div class="message-time">5:35 PM <i class="fas fa-check-double"></i></div>
+                                            </div>
+                                        </div>
+                                        <div class="message-bubble guest">
+                                            <div class="message-content">
+                                                <p>Perfect! Thank you for organizing this so well.</p>
+                                                <div class="message-time">5:36 PM</div>
+                                            </div>
+                                        </div>
+                                        <div class="message-input">
+                                            <div class="input-actions">
+                                                <i class="fas fa-smile"></i>
+                                                <i class="fas fa-paperclip"></i>
+                                            </div>
+                                            <div class="input-field">
+                                                <input type="text" placeholder="Type a message">
+                                            </div>
+                                            <div class="input-send">
+                                                <i class="fas fa-microphone"></i>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -263,16 +389,25 @@
                     
                     <div class="communication-features">
                         <div class="comm-feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-user-friends"></i>
+                            </div>
                             <h3 class="feature-title">Personalized Journeys</h3>
                             <p class="feature-description">Tailored communications that make each guest feel like an honored part of your story</p>
                         </div>
                         
                         <div class="comm-feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
                             <h3 class="feature-title">Meaningful Updates</h3>
                             <p class="feature-description">Sharing the excitement and anticipation with those who matter most</p>
                         </div>
                         
                         <div class="comm-feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
                             <h3 class="feature-title">Cherished Memories</h3>
                             <p class="feature-description">Preserving the moments and emotions of your celebration for years to come</p>
                         </div>
@@ -333,9 +468,9 @@
                             <li><a href="tel:+919876543210">+91 98765 43210</a></li>
                         </ul>
                         <div class="social-links">
-                            <a href="#" class="social-link">Instagram</a>
-                            <a href="#" class="social-link">Facebook</a>
-                            <a href="#" class="social-link">Twitter</a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
                         </div>
                     </div>
                 </div>
@@ -358,11 +493,11 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://unpkg.com/three@latest/build/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-    <script src="background.js"></script>
-    <script src="animations.js"></script>
-    <script src="interactions.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <script src="js/background.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/interactions.js"></script>
 </body>
 </html>
