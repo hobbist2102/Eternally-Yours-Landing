@@ -1,4 +1,4 @@
-// Enhanced Background.js - Luxury WebGL Starlit Sky Background with Nebula Effects and Parallax
+// Enhanced Background.js - Luxury WebGL Gold Shimmer/Dust Effect with Parallax
 // Created for eternallyyoursrsvp.in
 
 // Initialize Three.js scene when document is loaded
@@ -67,101 +67,143 @@ function initWebGLBackground() {
   // Position camera
   camera.position.z = 30;
   
-  // Create circular texture for stars instead of square pixels
-  const starTexture = createCircularTexture();
+  // Create gold shimmer/dust effect
+  const shimmerSystem = createGoldShimmerSystem();
+  scene.add(shimmerSystem);
   
-  // Create multiple star layers for parallax effect
-  const starLayers = [
-    { count: 2000, size: [0.1, 0.3], color: 0xffffff, distance: 100, speed: 0.00005 },
-    { count: 1500, size: [0.2, 0.5], color: 0xf8f8ff, distance: 80, speed: 0.0001 },
-    { count: 1000, size: [0.3, 0.7], color: 0xfffaf0, distance: 60, speed: 0.00015 },
-    { count: 500, size: [0.4, 0.9], color: 0xffd700, distance: 40, speed: 0.0002 }
-  ];
+  // Create subtle nebula effects for depth
+  const nebulaSystem = createNebulaSystem();
+  scene.add(nebulaSystem);
   
-  const starGroups = starLayers.map(layer => createStarLayer(layer, starTexture));
-  starGroups.forEach(group => scene.add(group));
-  
-  // Create nebula effects
-  const nebulaLayers = [
-    { count: 2000, size: [0.3, 0.8], color: 0xd4af37, opacity: 0.3, distance: 50, speed: 0.0002 },
-    { count: 1500, size: [0.4, 1.0], color: 0x9932cc, opacity: 0.2, distance: 60, speed: 0.00015 },
-    { count: 1000, size: [0.5, 1.2], color: 0x800080, opacity: 0.15, distance: 70, speed: 0.0001 }
-  ];
-  
-  const nebulaGroups = nebulaLayers.map(layer => createNebulaLayer(layer, starTexture));
-  nebulaGroups.forEach(group => scene.add(group));
-  
-  // Create shooting stars system
+  // Create occasional shooting stars
   const shootingStarSystem = createShootingStarSystem();
   scene.add(shootingStarSystem);
   
-  // Create function to generate circular texture for particles
-  function createCircularTexture() {
-    const canvas = document.createElement('canvas');
-    canvas.width = 64;
-    canvas.height = 64;
-    const ctx = canvas.getContext('2d');
+  // Create gold shimmer/dust system
+  function createGoldShimmerSystem() {
+    const group = new THREE.Group();
     
-    // Create radial gradient for soft-edged circle
-    const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-    gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-    gradient.addColorStop(0.3, 'rgba(255, 255, 255, 0.8)');
-    gradient.addColorStop(0.7, 'rgba(255, 255, 255, 0.3)');
-    gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+    // Create multiple shimmer layers for depth and richness
+    const shimmerLayers = [
+      { count: 3000, sizeRange: [0.05, 0.15], color: 0xffd700, opacity: 0.7, distance: 50, speed: 0.00015 },
+      { count: 2500, sizeRange: [0.03, 0.12], color: 0xf5deb3, opacity: 0.6, distance: 70, speed: 0.0001 },
+      { count: 2000, sizeRange: [0.02, 0.08], color: 0xd4af37, opacity: 0.5, distance: 90, speed: 0.00005 }
+    ];
     
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 64, 64);
+    // Create shimmer particles with custom textures
+    shimmerLayers.forEach(layer => {
+      const shimmerParticles = createShimmerLayer(layer);
+      group.add(shimmerParticles);
+    });
     
-    const texture = new THREE.Texture(canvas);
-    texture.needsUpdate = true;
-    return texture;
+    return group;
   }
   
-  // Create star layer with custom parameters
-  function createStarLayer(layer, texture) {
+  // Create a single shimmer layer
+  function createShimmerLayer(layer) {
+    // Create soft, glowing particle texture
+    const texture = createShimmerTexture(layer.color);
+    
+    // Create geometry for particles
     const geometry = new THREE.BufferGeometry();
     const material = new THREE.PointsMaterial({
       color: layer.color,
-      size: layer.size[1],
+      size: layer.sizeRange[1],
       map: texture,
       transparent: true,
-      opacity: 0.8,
+      opacity: layer.opacity,
       depthWrite: false,
       blending: THREE.AdditiveBlending
     });
     
-    const positions = new Float32Array(layer.count * 3);
-    const sizes = new Float32Array(layer.count);
+    // Create particles with flowing pattern
+    const particleCount = layer.count;
+    const positions = new Float32Array(particleCount * 3);
+    const sizes = new Float32Array(particleCount);
+    const speeds = new Float32Array(particleCount);
+    const offsets = new Float32Array(particleCount);
     
-    for (let i = 0; i < layer.count; i++) {
-      // Create stars in a dome shape for more realistic sky
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.random() * Math.PI * 0.65;
-      const distance = layer.distance;
+    for (let i = 0; i < particleCount; i++) {
+      // Create flowing pattern with clusters
+      const angle = Math.random() * Math.PI * 2;
+      const radius = Math.random() * layer.distance;
+      const height = (Math.random() - 0.5) * layer.distance * 1.5;
       
-      positions[i * 3] = distance * Math.sin(phi) * Math.cos(theta);
-      positions[i * 3 + 1] = distance * Math.sin(phi) * Math.sin(theta);
-      positions[i * 3 + 2] = distance * Math.cos(phi);
+      // Position with slight clustering for dust-like appearance
+      const cluster = Math.floor(Math.random() * 8);
+      let offsetX = 0, offsetY = 0;
       
-      // Random size within range
-      sizes[i] = Math.random() * (layer.size[1] - layer.size[0]) + layer.size[0];
+      // Create natural clustering pattern
+      switch (cluster) {
+        case 0: offsetX = 10; offsetY = 15; break;
+        case 1: offsetX = -15; offsetY = 10; break;
+        case 2: offsetX = 5; offsetY = -15; break;
+        case 3: offsetX = -10; offsetY = -10; break;
+        case 4: offsetX = 20; offsetY = 0; break;
+        case 5: offsetX = -20; offsetY = 5; break;
+        case 6: offsetX = 0; offsetY = 20; break;
+        case 7: offsetX = -5; offsetY = -20; break;
+      }
+      
+      // Apply cluster offset with randomness for natural look
+      const x = radius * Math.cos(angle) + offsetX * (0.5 + Math.random() * 0.5);
+      const y = height + offsetY * (0.5 + Math.random() * 0.5);
+      const z = radius * Math.sin(angle) * 0.5;
+      
+      positions[i * 3] = x;
+      positions[i * 3 + 1] = y;
+      positions[i * 3 + 2] = z;
+      
+      // Varied sizes for more natural shimmer effect
+      sizes[i] = Math.random() * (layer.sizeRange[1] - layer.sizeRange[0]) + layer.sizeRange[0];
+      
+      // Random movement speeds and animation offsets
+      speeds[i] = 0.2 + Math.random() * 0.8;
+      offsets[i] = Math.random() * Math.PI * 2;
     }
     
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
     
-    const stars = new THREE.Points(geometry, material);
-    stars.userData = { speed: layer.speed, distance: layer.distance };
+    const particles = new THREE.Points(geometry, material);
     
-    return stars;
+    // Store animation data for update function
+    particles.userData = {
+      speeds: speeds,
+      offsets: offsets,
+      initialPositions: positions.slice(),
+      layer: layer
+    };
+    
+    return particles;
   }
   
-  // Create nebula layer with custom parameters
-  function createNebulaLayer(layer, texture) {
+  // Create nebula system for depth and atmosphere
+  function createNebulaSystem() {
+    const group = new THREE.Group();
+    
+    // Create subtle nebula clouds
+    const nebulaLayers = [
+      { count: 800, size: 1.2, color: 0xd4af37, opacity: 0.15, distance: 80 },
+      { count: 600, size: 1.5, color: 0x800080, opacity: 0.1, distance: 100 }
+    ];
+    
+    nebulaLayers.forEach(layer => {
+      const nebula = createNebulaCloud(layer);
+      group.add(nebula);
+    });
+    
+    return group;
+  }
+  
+  // Create a single nebula cloud
+  function createNebulaCloud(layer) {
+    const texture = createShimmerTexture(layer.color, 128, 0.8);
+    
     const geometry = new THREE.BufferGeometry();
     const material = new THREE.PointsMaterial({
       color: layer.color,
-      size: layer.size[1],
+      size: layer.size,
       map: texture,
       transparent: true,
       opacity: layer.opacity,
@@ -170,58 +212,28 @@ function initWebGLBackground() {
     });
     
     const positions = new Float32Array(layer.count * 3);
-    const sizes = new Float32Array(layer.count);
     
-    // Create nebula cloud formations
+    // Create cloud-like formations
     for (let i = 0; i < layer.count; i++) {
-      // Create cloud-like clusters
-      const cluster = Math.floor(Math.random() * 5);
+      // Create flowing, cloud-like pattern
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.random() * Math.PI;
-      const distance = layer.distance * (0.8 + Math.random() * 0.4);
+      const r = layer.distance * (0.7 + Math.random() * 0.3);
       
-      // Base position
-      let x = distance * Math.sin(phi) * Math.cos(theta);
-      let y = distance * Math.sin(phi) * Math.sin(theta);
-      let z = distance * Math.cos(phi);
-      
-      // Add cluster offset
-      switch (cluster) {
-        case 0: // Upper right
-          x += 20;
-          y += 15;
-          break;
-        case 1: // Lower left
-          x -= 25;
-          y -= 10;
-          break;
-        case 2: // Center
-          x += 5;
-          y -= 5;
-          break;
-        case 3: // Upper left
-          x -= 15;
-          y += 20;
-          break;
-        case 4: // Lower right
-          x += 10;
-          y -= 25;
-          break;
-      }
+      // Base position with cluster pattern
+      const x = r * Math.sin(phi) * Math.cos(theta);
+      const y = (Math.random() - 0.5) * layer.distance * 0.5;
+      const z = r * Math.sin(phi) * Math.sin(theta) * 0.5;
       
       positions[i * 3] = x;
       positions[i * 3 + 1] = y;
       positions[i * 3 + 2] = z;
-      
-      // Random size within range
-      sizes[i] = Math.random() * (layer.size[1] - layer.size[0]) + layer.size[0];
     }
     
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
     
     const nebula = new THREE.Points(geometry, material);
-    nebula.userData = { speed: layer.speed, distance: layer.distance };
+    nebula.userData = { speed: 0.0001, rotationAxis: new THREE.Vector3(0, 1, 0.5).normalize() };
     
     return nebula;
   }
@@ -248,14 +260,19 @@ function initWebGLBackground() {
           startPoint.z
         );
         
-        const shootingStarGeometry = new THREE.BufferGeometry().setFromPoints([
-          startPoint,
-          endPoint
-        ]);
+        // Create points for trail effect
+        const points = [];
+        const segments = 10;
+        for (let i = 0; i <= segments; i++) {
+          const point = new THREE.Vector3().lerpVectors(startPoint, endPoint, i / segments);
+          points.push(point);
+        }
         
-        // Create a glowing line material
+        const shootingStarGeometry = new THREE.BufferGeometry().setFromPoints(points);
+        
+        // Create a glowing line material with gold tint
         const shootingStarMaterial = new THREE.LineBasicMaterial({
-          color: 0xffffff,
+          color: 0xfffacd, // Light gold/yellow
           transparent: true,
           opacity: 0,
           blending: THREE.AdditiveBlending
@@ -314,6 +331,51 @@ function initWebGLBackground() {
     return group;
   }
   
+  // Create shimmer texture for gold dust effect
+  function createShimmerTexture(color = 0xffd700, size = 64, softness = 0.9) {
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    
+    // Create radial gradient for soft-edged particles
+    const gradient = ctx.createRadialGradient(
+      size/2, size/2, 0,
+      size/2, size/2, size/2
+    );
+    
+    // Convert hex color to RGB
+    const r = (color >> 16) & 255;
+    const g = (color >> 8) & 255;
+    const b = color & 255;
+    
+    // Create soft gradient for shimmer effect
+    gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, 1)`);
+    gradient.addColorStop(softness * 0.3, `rgba(${r}, ${g}, ${b}, 0.8)`);
+    gradient.addColorStop(softness * 0.7, `rgba(${r}, ${g}, ${b}, 0.3)`);
+    gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+    
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, size, size);
+    
+    // Add subtle sparkle effect
+    if (Math.random() > 0.7) {
+      ctx.globalCompositeOperation = 'lighten';
+      const sparkleGradient = ctx.createRadialGradient(
+        size/2, size/2, 0,
+        size/2, size/2, size/4
+      );
+      sparkleGradient.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
+      sparkleGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      ctx.fillStyle = sparkleGradient;
+      ctx.fillRect(0, 0, size, size);
+    }
+    
+    const texture = new THREE.Texture(canvas);
+    texture.needsUpdate = true;
+    return texture;
+  }
+  
   // Handle window resize
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -344,6 +406,9 @@ function initWebGLBackground() {
   function animate() {
     requestAnimationFrame(animate);
     
+    // Current time for animations
+    const time = Date.now() * 0.001;
+    
     // Smooth mouse movement
     targetX = mouseX * 0.001;
     targetY = mouseY * 0.001;
@@ -351,35 +416,65 @@ function initWebGLBackground() {
     // Smooth scroll movement
     scrollY += (targetScrollY - scrollY) * 0.05;
     
-    // Update star layers with different speeds for parallax
-    starGroups.forEach((stars, index) => {
-      // Rotate based on mouse position (interactive)
-      stars.rotation.y += (targetX - stars.rotation.y) * 0.01 * stars.userData.speed * 20;
-      stars.rotation.x += (targetY - stars.rotation.x) * 0.01 * stars.userData.speed * 20;
+    // Update shimmer particles
+    shimmerSystem.children.forEach((particles, layerIndex) => {
+      const positions = particles.geometry.attributes.position.array;
+      const initialPositions = particles.userData.initialPositions;
+      const speeds = particles.userData.speeds;
+      const offsets = particles.userData.offsets;
+      const layer = particles.userData.layer;
       
-      // Constant slow rotation for ambient movement
-      stars.rotation.y += stars.userData.speed;
-      stars.rotation.x += stars.userData.speed * 0.5;
+      // Update each particle
+      for (let i = 0; i < positions.length / 3; i++) {
+        // Get initial position
+        const ix = initialPositions[i * 3];
+        const iy = initialPositions[i * 3 + 1];
+        const iz = initialPositions[i * 3 + 2];
+        
+        // Calculate flowing movement
+        const speed = speeds[i];
+        const offset = offsets[i];
+        
+        // Gentle flowing motion in a figure-8 pattern
+        const flowX = Math.sin(time * speed + offset) * 0.5;
+        const flowY = Math.sin(time * speed * 0.5 + offset) * 0.3;
+        const flowZ = Math.cos(time * speed * 0.7 + offset) * 0.2;
+        
+        // Apply flowing motion
+        positions[i * 3] = ix + flowX;
+        positions[i * 3 + 1] = iy + flowY;
+        positions[i * 3 + 2] = iz + flowZ;
+      }
+      
+      // Update geometry
+      particles.geometry.attributes.position.needsUpdate = true;
+      
+      // Subtle rotation for overall shimmer effect
+      particles.rotation.y += layer.speed * 0.5;
+      particles.rotation.x += layer.speed * 0.3;
       
       // Parallax effect based on scroll position
-      const parallaxY = scrollY * 0.0005 * (index + 1) / starGroups.length;
-      stars.position.y = -parallaxY * stars.userData.distance * 0.1;
+      const parallaxY = scrollY * 0.0003 * (layerIndex + 1) / shimmerSystem.children.length;
+      particles.position.y = -parallaxY * layer.distance * 0.2;
+      
+      // Interactive movement based on mouse position
+      const mouseEffect = 0.0001 * (layerIndex + 1);
+      particles.rotation.y += targetX * mouseEffect;
+      particles.rotation.x += targetY * mouseEffect;
     });
     
-    // Update nebula layers
-    nebulaGroups.forEach((nebula, index) => {
-      // Slower rotation for nebulas
-      nebula.rotation.y += nebula.userData.speed * 0.5;
-      nebula.rotation.z += nebula.userData.speed * 0.3;
+    // Update nebula clouds
+    nebulaSystem.children.forEach((nebula, index) => {
+      // Slow rotation around custom axis
+      nebula.rotateOnAxis(nebula.userData.rotationAxis, nebula.userData.speed);
       
       // Subtle pulsing effect
-      const time = Date.now() * 0.0005;
-      const pulseFactor = Math.sin(time + index) * 0.05 + 1;
-      nebula.material.opacity = nebula.material.userData?.baseOpacity || 0.3 * pulseFactor;
+      const pulseFactor = Math.sin(time * 0.5 + index) * 0.05 + 1;
+      nebula.material.opacity = nebula.material.userData?.baseOpacity || nebula.material.opacity * pulseFactor;
       
-      // Parallax effect based on scroll position (opposite direction to stars)
-      const parallaxY = scrollY * 0.0003 * (index + 1) / nebulaGroups.length;
-      nebula.position.y = parallaxY * nebula.userData.distance * 0.05;
+      // Parallax effect based on scroll position (opposite direction to shimmer)
+      const parallaxY = scrollY * 0.0002 * (index + 1) / nebulaSystem.children.length;
+      nebula.position.y = parallaxY * 10;
     });
     
     // Update shooting stars
@@ -390,35 +485,4 @@ function initWebGLBackground() {
   
   // Start animation loop
   animate();
-}
-
-// Helper function to create a glowing particle texture
-function createGlowTexture(color = 0xffffff, size = 64) {
-  const canvas = document.createElement('canvas');
-  canvas.width = size;
-  canvas.height = size;
-  const ctx = canvas.getContext('2d');
-  
-  // Create radial gradient
-  const gradient = ctx.createRadialGradient(
-    size/2, size/2, 0,
-    size/2, size/2, size/2
-  );
-  
-  // Convert hex color to RGB
-  const r = (color >> 16) & 255;
-  const g = (color >> 8) & 255;
-  const b = color & 255;
-  
-  gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, 1)`);
-  gradient.addColorStop(0.3, `rgba(${r}, ${g}, ${b}, 0.8)`);
-  gradient.addColorStop(0.7, `rgba(${r}, ${g}, ${b}, 0.3)`);
-  gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
-  
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, size, size);
-  
-  const texture = new THREE.Texture(canvas);
-  texture.needsUpdate = true;
-  return texture;
 }
