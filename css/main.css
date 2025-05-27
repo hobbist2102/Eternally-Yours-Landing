@@ -1,4 +1,4 @@
-/*
+/* 
  * Eternally Yours - Professional Luxury Wedding RSVP Platform
  * Main Stylesheet - Created for eternallyyoursrsvp.in
  * 
@@ -96,17 +96,16 @@ html {
   scroll-behavior: smooth;
 }
 
-body, html {
+body {
   font-family: var(--font-primary);
   font-size: var(--font-size-base);
   line-height: 1.6;
   color: var(--color-text);
-  background: var(--color-primary);
   background-color: var(--color-primary);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  cursor: none;
+  cursor: none; /* Hide default cursor for custom cursor */
 }
 
 a {
@@ -180,14 +179,12 @@ p {
   position: relative;
   min-height: 100vh;
   overflow: hidden;
-  /* DO NOT set background transparent here. */
 }
 
 .section-container {
   max-width: 1440px;
   margin: 0 auto;
   padding: var(--space-xl) var(--space-lg);
-  /* DO NOT set background transparent here. */
 }
 
 .section-header {
@@ -299,6 +296,31 @@ p {
   font-size: var(--font-size-sm);
   color: var(--color-text-subtle);
 }
+
+/* ======= WEBGL BACKGROUND ======= */
+
+#webgl-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-background);
+  opacity: 0.8;
+  background: transparent !important;
+  pointer-events: none;
+}
+
+/* ======= PATCH: Only make overlays transparent to avoid grey flash ======= */
+.cta-section,
+.cta-section .section-background,
+.section-with-parallax .section-background {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* ======= [REMAINDER OF YOUR FILE - NAVIGATION, HERO SECTION, CARDS, ETC] ======= */
+/* ...Paste the rest of your original main.css here, unchanged... */
 
 /* ======= WEBGL BACKGROUND ======= */
 
