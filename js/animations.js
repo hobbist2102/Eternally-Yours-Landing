@@ -14,6 +14,7 @@ function initAnimations() {
   initMicroInteractions();
   initCustomCursor();
   initNavigationEffects();
+  initLuxuryCardEffects();
 }
 
 // Scroll-triggered animations using Intersection Observer
@@ -66,6 +67,24 @@ function initScrollAnimations() {
     // Observe title for animation
     observer.observe(title);
   });
+  
+  // Add staggered reveal animations for lists and groups
+  const staggeredGroups = document.querySelectorAll('[data-stagger="true"]');
+  staggeredGroups.forEach(group => {
+    const children = Array.from(group.children);
+    const baseDelay = parseInt(group.dataset.staggerDelay || 100);
+    
+    children.forEach((child, index) => {
+      child.style.opacity = '0';
+      child.style.transform = 'translateY(20px)';
+      child.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      
+      // Add to observer with staggered delay
+      setTimeout(() => {
+        observer.observe(child);
+      }, index * baseDelay);
+    });
+  });
 }
 
 // Enhanced parallax effects for background layers and content
@@ -116,6 +135,19 @@ function initParallaxEffects() {
           const yPos = (scrollY - sectionTop) * speed;
           background.style.transform = `translate3D(0, ${yPos}px, 0)`;
         }
+        
+        // Enhanced depth effect for section content
+        const contentElements = section.querySelectorAll('[data-depth]');
+        contentElements.forEach(element => {
+          const depth = parseFloat(element.dataset.depth) || 0.1;
+          const elementTop = element.offsetTop + section.offsetTop;
+          const elementProgress = (scrollY - elementTop + window.innerHeight) / window.innerHeight;
+          
+          if (elementProgress > 0 && elementProgress < 1.5) {
+            const moveY = (elementProgress - 0.5) * depth * 100;
+            element.style.transform = `translate3D(0, ${moveY}px, 0)`;
+          }
+        });
       }
     });
     
@@ -142,6 +174,28 @@ function initParallaxEffects() {
         }
         
         element.style.transform = `translate3D(0, ${yPos}px, 0)`;
+      }
+    });
+    
+    // Multi-layer parallax for cards and features
+    const cardContainers = document.querySelectorAll('.challenge-cards, .features-showcase, .transport-features, .communication-cards');
+    cardContainers.forEach(container => {
+      const containerTop = container.offsetTop;
+      const containerHeight = container.offsetHeight;
+      const containerProgress = (scrollY + window.innerHeight - containerTop) / (containerHeight + window.innerHeight);
+      
+      if (containerProgress > 0 && containerProgress < 1) {
+        const cards = container.querySelectorAll('.challenge-card, .feature-card, .transport-feature, .communication-card');
+        
+        cards.forEach((card, index) => {
+          // Create staggered movement based on index
+          const staggerFactor = index * 0.1;
+          const moveY = (containerProgress - 0.5) * 30 * (1 + staggerFactor);
+          const moveX = Math.sin(containerProgress * Math.PI) * 10 * (index % 2 === 0 ? 1 : -1);
+          const rotate = Math.sin(containerProgress * Math.PI) * 2 * (index % 2 === 0 ? 1 : -1);
+          
+          card.style.transform = `translate3D(${moveX}px, ${moveY}px, 0) rotate(${rotate}deg)`;
+        });
       }
     });
   }
@@ -194,19 +248,66 @@ function initParallaxEffects() {
         
         heroContent.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
       }
+      
+      // Add subtle light effect following cursor
+      const lightEffect = heroSection.querySelector('.light-effect') || document.createElement('div');
+      if (!heroSection.querySelector('.light-effect')) {
+        lightEffect.classList.add('light-effect');
+        heroSection.appendChild(lightEffect);
+      }
+      
+      lightEffect.style.left = `${x}px`;
+      lightEffect.style.top = `${y}px`;
+    }
+    
+    // Add subtle floating animation to hero content
+    const heroContent = heroSection.querySelector('.hero-content');
+    if (heroContent) {
+      function animateHeroContent() {
+        const time = Date.now() / 2000;
+        const floatY = Math.sin(time) * 10;
+        const floatRotateX = Math.sin(time * 0.7) * 1;
+        const floatRotateY = Math.cos(time * 0.5) * 1;
+        
+        heroContent.style.transform = `perspective(1000px) translateY(${floatY}px) rotateX(${floatRotateX}deg) rotateY(${floatRotateY}deg)`;
+        
+        requestAnimationFrame(animateHeroContent);
+      }
+      
+      animateHeroContent();
     }
   }
   
   // Initialize parallax positions on load
   updateParallaxPositions(window.scrollY);
+  
+  // Add scroll-triggered reveal animations for sections
+  const sections = document.querySelectorAll('section');
+  sections.forEach(section => {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        section.classList.add('section-visible');
+        observer.unobserve(section);
+      }
+    }, { threshold: 0.2 });
+    
+    observer.observe(section);
+  });
 }
 
 // Micro-interactions for buttons, cards, and UI elements
 function initMicroInteractions() {
-  // Magnetic buttons
+  // Magnetic buttons with enhanced hover effects
   const magneticButtons = document.querySelectorAll('.btn-primary, .btn-secondary, .nav-link.cta');
   
   magneticButtons.forEach(button => {
+    // Add shine element if not exists
+    if (!button.querySelector('.btn-shine')) {
+      const shine = document.createElement('span');
+      shine.classList.add('btn-shine');
+      button.appendChild(shine);
+    }
+    
     button.addEventListener('mousemove', (e) => {
       const rect = button.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -225,20 +326,21 @@ function initMicroInteractions() {
       button.style.transform = `translate(${moveX}px, ${moveY}px)`;
       
       // Highlight effect
-      const shine = button.querySelector('.btn-shine') || document.createElement('span');
-      if (!button.querySelector('.btn-shine')) {
-        shine.classList.add('btn-shine');
-        button.appendChild(shine);
+      const shine = button.querySelector('.btn-shine');
+      if (shine) {
+        shine.style.opacity = '1';
+        shine.style.left = `${x}px`;
+        shine.style.top = `${y}px`;
       }
       
-      shine.style.opacity = '1';
-      shine.style.left = `${x}px`;
-      shine.style.top = `${y}px`;
+      // Add subtle shadow movement
+      button.style.boxShadow = `${deltaX * 5}px ${deltaY * 5}px 15px rgba(0, 0, 0, 0.2)`;
     });
     
     button.addEventListener('mouseleave', () => {
       // Reset position with smooth transition
       button.style.transform = 'translate(0, 0)';
+      button.style.boxShadow = '';
       
       // Fade out shine
       const shine = button.querySelector('.btn-shine');
@@ -246,21 +348,74 @@ function initMicroInteractions() {
         shine.style.opacity = '0';
       }
     });
+    
+    // Add click effect
+    button.addEventListener('mousedown', () => {
+      button.style.transform = 'translate(0, 2px)';
+      button.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.2)';
+    });
+    
+    button.addEventListener('mouseup', () => {
+      button.style.transform = 'translate(0, 0)';
+      button.style.boxShadow = '';
+    });
   });
   
+  // Enhanced WhatsApp message animation
+  animateWhatsAppMessages();
+  
+  // Add subtle hover effects to navigation links
+  const navLinks = document.querySelectorAll('.nav-link:not(.cta)');
+  navLinks.forEach(link => {
+    link.addEventListener('mouseenter', () => {
+      link.style.transform = 'translateY(-2px)';
+    });
+    
+    link.addEventListener('mouseleave', () => {
+      link.style.transform = 'translateY(0)';
+    });
+  });
+  
+  // Add subtle animations to icons
+  const icons = document.querySelectorAll('.card-icon, .feature-icon, .transport-icon, .communication-icon');
+  icons.forEach(icon => {
+    // Subtle pulse animation
+    function pulseAnimation() {
+      const time = Date.now() / 1000;
+      const scale = 1 + Math.sin(time) * 0.05;
+      
+      icon.style.transform = `scale(${scale})`;
+      
+      requestAnimationFrame(pulseAnimation);
+    }
+    
+    pulseAnimation();
+  });
+}
+
+// Enhanced luxury card effects with 3D transformations and dynamic lighting
+function initLuxuryCardEffects() {
   // Enhanced 3D Card tilt effect
-  const tiltCards = document.querySelectorAll('.challenge-card, .feature-card');
+  const tiltCards = document.querySelectorAll('.challenge-card, .feature-card, .transport-feature, .communication-card');
   
   tiltCards.forEach(card => {
+    // Add glare element if not exists
+    if (!card.querySelector('.card-glare')) {
+      const glare = document.createElement('div');
+      glare.classList.add('card-glare');
+      card.appendChild(glare);
+    }
+    
     // Track if mouse is over card
     let isHovering = false;
     
     // Add subtle floating animation when not hovering
     function startFloatingAnimation() {
       if (!isHovering) {
-        const floatY = Math.sin(Date.now() / 1000) * 5;
-        const floatRotateX = Math.sin(Date.now() / 1500) * 2;
-        const floatRotateY = Math.cos(Date.now() / 2000) * 2;
+        const time = Date.now() / 1000;
+        const floatY = Math.sin(time) * 5;
+        const floatRotateX = Math.sin(time * 1.5) * 2;
+        const floatRotateY = Math.cos(time * 2) * 2;
         
         card.style.transform = `perspective(1000px) rotateX(${floatRotateX}deg) rotateY(${floatRotateY}deg) translateY(${floatY}px)`;
         
@@ -297,8 +452,10 @@ function initMicroInteractions() {
       card.style.boxShadow = `${shadowX}px ${shadowY}px 30px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.1)`;
       
       // Move card content for enhanced 3D effect
-      const cardContent = card.querySelector('.card-content');
-      const cardIcon = card.querySelector('.card-icon, .feature-icon');
+      const cardContent = card.querySelector('.card-content, .feature-content, .transport-content, .communication-content');
+      const cardIcon = card.querySelector('.card-icon, .feature-icon, .transport-icon, .communication-icon');
+      const cardTitle = card.querySelector('.card-title, .feature-title, .transport-title, .communication-title');
+      const cardDescription = card.querySelector('.card-description, .feature-description, .transport-description, .communication-description');
       
       if (cardContent) {
         cardContent.style.transform = `translateZ(20px)`;
@@ -309,18 +466,22 @@ function initMicroInteractions() {
         cardIcon.style.textShadow = `${-deltaX * 5}px ${-deltaY * 5}px 5px rgba(0, 0, 0, 0.3)`;
       }
       
-      // Add highlight effect
-      const glare = card.querySelector('.card-glare') || document.createElement('div');
-      if (!card.querySelector('.card-glare')) {
-        glare.classList.add('card-glare');
-        card.appendChild(glare);
+      if (cardTitle) {
+        cardTitle.style.transform = `translateZ(30px) translateX(${deltaX * 5}px)`;
+      }
+      
+      if (cardDescription) {
+        cardDescription.style.transform = `translateZ(20px) translateX(${deltaX * 3}px)`;
       }
       
       // Position glare based on mouse
-      const glareX = x / rect.width * 100;
-      const glareY = y / rect.height * 100;
-      glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%)`;
-      glare.style.opacity = '1';
+      const glare = card.querySelector('.card-glare');
+      if (glare) {
+        const glareX = x / rect.width * 100;
+        const glareY = y / rect.height * 100;
+        glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%)`;
+        glare.style.opacity = '1';
+      }
     });
     
     card.addEventListener('mouseleave', () => {
@@ -328,10 +489,12 @@ function initMicroInteractions() {
       
       // Reset transforms with smooth transition
       card.style.transition = 'transform 0.5s ease, box-shadow 0.5s ease';
-      card.style.boxShadow = 'var(--shadow-md)';
+      card.style.boxShadow = '';
       
-      const cardContent = card.querySelector('.card-content');
-      const cardIcon = card.querySelector('.card-icon, .feature-icon');
+      const cardContent = card.querySelector('.card-content, .feature-content, .transport-content, .communication-content');
+      const cardIcon = card.querySelector('.card-icon, .feature-icon, .transport-icon, .communication-icon');
+      const cardTitle = card.querySelector('.card-title, .feature-title, .transport-title, .communication-title');
+      const cardDescription = card.querySelector('.card-description, .feature-description, .transport-description, .communication-description');
       
       if (cardContent) {
         cardContent.style.transform = 'translateZ(0)';
@@ -340,6 +503,14 @@ function initMicroInteractions() {
       if (cardIcon) {
         cardIcon.style.transform = 'translateZ(0)';
         cardIcon.style.textShadow = 'none';
+      }
+      
+      if (cardTitle) {
+        cardTitle.style.transform = 'translateZ(0)';
+      }
+      
+      if (cardDescription) {
+        cardDescription.style.transform = 'translateZ(0)';
       }
       
       // Fade out glare
@@ -352,9 +523,6 @@ function initMicroInteractions() {
       startFloatingAnimation();
     });
   });
-  
-  // Enhanced WhatsApp message animation
-  animateWhatsAppMessages();
 }
 
 // Animate WhatsApp messages with typing indicators and sequential appearance
@@ -449,6 +617,13 @@ function animateWhatsAppMessages() {
       // Increase delay for next message
       delay += bubble.classList.contains('guest') ? 3000 : 1500;
     });
+    
+    // After all messages, show typing indicator again
+    setTimeout(() => {
+      if (typingIndicator) {
+        typingIndicator.style.display = 'flex';
+      }
+    }, delay);
   }
 }
 
@@ -473,178 +648,114 @@ function initCustomCursor() {
   
   // Animate cursor with requestAnimationFrame for smooth movement
   function animateCursor() {
-    // Calculate smooth movement with easing
-    const easeFactor = 0.2;
-    cursorX += (mouseX - cursorX) * easeFactor;
-    cursorY += (mouseY - cursorY) * easeFactor;
+    // Smooth follow with easing
+    cursorX += (mouseX - cursorX) * 0.2;
+    cursorY += (mouseY - cursorY) * 0.2;
     
-    // Apply position with transform for better performance
-    cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
-    cursorCircle.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+    cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    cursorCircle.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
     
     requestAnimationFrame(animateCursor);
   }
   
   animateCursor();
   
-  // Enhanced hover effects for interactive elements
-  const interactiveElements = document.querySelectorAll('a, button, .btn, .nav-link, .feature-card, .challenge-card');
+  // Change cursor style on interactive elements
+  const interactiveElements = document.querySelectorAll('a, button, .btn, .nav-link, .card, .feature-card, .transport-feature, .communication-card');
   
   interactiveElements.forEach(element => {
     element.addEventListener('mouseenter', () => {
-      // Expand circle and change opacity with smooth transition
       cursorCircle.classList.add('expanded');
-      
-      // Different effects for different element types
-      if (element.classList.contains('btn-primary')) {
-        cursorCircle.classList.add('primary');
-      } else if (element.classList.contains('feature-card') || element.classList.contains('challenge-card')) {
-        cursorCircle.classList.add('card');
-      }
     });
     
     element.addEventListener('mouseleave', () => {
-      // Reset to default with smooth transition
-      cursorCircle.classList.remove('expanded', 'primary', 'card');
+      cursorCircle.classList.remove('expanded');
     });
   });
   
-  // Hide cursor when leaving window
-  document.addEventListener('mouseout', (e) => {
-    if (e.relatedTarget === null) {
-      cursor.classList.add('hidden');
-    }
-  });
+  // Hide default cursor
+  document.body.style.cursor = 'none';
   
-  document.addEventListener('mouseover', () => {
-    cursor.classList.remove('hidden');
-  });
-  
-  // Add cursor styles if not already present
-  if (!document.getElementById('cursor-styles')) {
-    const style = document.createElement('style');
-    style.id = 'cursor-styles';
-    style.textContent = `
-      .custom-cursor {
-        pointer-events: none;
-        position: fixed;
-        z-index: 9999;
-        mix-blend-mode: difference;
-        transition: opacity 0.3s ease;
-      }
-      
-      .custom-cursor.hidden {
-        opacity: 0;
-      }
-      
-      .cursor-dot {
-        position: fixed;
-        width: 8px;
-        height: 8px;
-        background-color: var(--color-gold-600);
-        border-radius: 50%;
-        transform: translate(-50%, -50%);
-        transition: opacity 0.3s ease;
-      }
-      
-      .cursor-circle {
-        position: fixed;
-        width: 40px;
-        height: 40px;
-        border: 1px solid var(--color-gold-600);
-        border-radius: 50%;
-        transform: translate(-50%, -50%);
-        transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
-      }
-      
-      .cursor-circle.expanded {
-        width: 60px;
-        height: 60px;
-        background-color: rgba(201, 176, 55, 0.1);
-      }
-      
-      .cursor-circle.primary {
-        border-color: var(--color-gold-600);
-        background-color: rgba(201, 176, 55, 0.15);
-      }
-      
-      .cursor-circle.card {
-        width: 80px;
-        height: 80px;
-        border-color: var(--color-gold-600);
-        background-color: rgba(201, 176, 55, 0.05);
-      }
-    `;
-    document.head.appendChild(style);
-  }
+  // Show custom cursor
+  cursor.style.opacity = '1';
 }
 
-// Navigation effects (scroll behavior, active states)
+// Navigation effects
 function initNavigationEffects() {
-  const mainNav = document.querySelector('.main-navigation');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const sections = document.querySelectorAll('section');
+  const nav = document.querySelector('.main-navigation');
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
   
-  // Change navigation background on scroll
+  if (!nav) return;
+  
+  // Change navigation style on scroll
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
-      mainNav.classList.add('scrolled');
+      nav.classList.add('scrolled');
     } else {
-      mainNav.classList.remove('scrolled');
+      nav.classList.remove('scrolled');
     }
+  });
+  
+  // Mobile navigation toggle
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
     
-    // Update active nav link based on scroll position
-    let currentSection = '';
+    // Close mobile nav when clicking a link
+    const links = navLinks.querySelectorAll('.nav-link');
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+  }
+  
+  // Highlight active section in navigation
+  const sections = document.querySelectorAll('section[id]');
+  
+  window.addEventListener('scroll', () => {
+    let current = '';
+    const scrollY = window.scrollY;
     
     sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
+      const sectionTop = section.offsetTop - 100;
+      const sectionHeight = section.offsetHeight;
       
-      if (window.scrollY >= sectionTop - 200 && window.scrollY < sectionTop + sectionHeight - 200) {
-        currentSection = section.getAttribute('id');
+      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+        current = section.getAttribute('id');
       }
     });
     
+    const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
       link.classList.remove('active');
-      if (link.getAttribute('href') === `#${currentSection}`) {
+      if (link.getAttribute('href') === `#${current}`) {
         link.classList.add('active');
       }
     });
   });
-  
-  // Smooth scroll for navigation links
-  navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      if (link.getAttribute('href').startsWith('#')) {
-        e.preventDefault();
-        
-        const targetId = link.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
-        
-        if (targetSection) {
-          window.scrollTo({
-            top: targetSection.offsetTop - 100,
-            behavior: 'smooth'
-          });
-        }
-      }
-    });
-  });
-  
-  // Mobile navigation toggle
-  const navToggle = document.querySelector('.nav-toggle');
-  const navLinksContainer = document.querySelector('.nav-links');
-  
-  if (navToggle && navLinksContainer) {
-    navToggle.addEventListener('click', () => {
-      navLinksContainer.classList.toggle('active');
+}
+
+// Add smooth scroll for anchor links
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
       
-      // Animate toggle icon
-      const toggleBars = navToggle.querySelectorAll('span');
-      toggleBars.forEach(bar => {
-        bar.classList.toggle('active');
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      
+      const targetElement = document.querySelector(targetId);
+      if (!targetElement) return;
+      
+      window.scrollTo({
+        top: targetElement.offsetTop,
+        behavior: 'smooth'
       });
     });
-  }
-}
+  });
+});
