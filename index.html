@@ -5,14 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eternally Yours | Where Love's Journey Begins</title>
     <link rel="stylesheet" href="css/main.css">
-    <link href="https://fonts.cdnfonts.com/css/good-vibes" rel="stylesheet">
+    <!-- Updated font imports for luxury typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" href="data:,">
+    <!-- Preload critical fonts for faster rendering -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" as="style">
+    <!-- Add custom meta tags for SEO and social sharing -->
+    <meta name="description" content="Eternally Yours - Transform your wedding celebration into an unforgettable experience of elegance and connection. From the first whispered 'yes' to the final farewell, we orchestrate every moment with care.">
+    <meta property="og:title" content="Eternally Yours | Where Love's Journey Begins">
+    <meta property="og:description" content="Transform your wedding celebration into an unforgettable experience of elegance and connection.">
+    <meta property="og:type" content="website">
 </head>
 <body>
     <!-- WebGL Canvas Background -->
     <canvas id="webgl-background"></canvas>
+    
+    <!-- Custom Cursor -->
+    <div class="custom-cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-circle"></div>
+    </div>
     
     <!-- Loading Screen -->
     <div class="loading-screen">
@@ -56,23 +70,23 @@
 
         <!-- Hero Section - Act 1: The Invitation -->
         <section class="hero-section" id="hero">
-            <div class="parallax-layer layer-1"></div>
-            <div class="parallax-layer layer-2"></div>
-            <div class="parallax-layer layer-3"></div>
+            <div class="parallax-layer layer-1" data-speed="0.1" data-speedX="0.05" data-speedY="0.02"></div>
+            <div class="parallax-layer layer-2" data-speed="0.2" data-speedX="0.1" data-speedY="0.05"></div>
+            <div class="parallax-layer layer-3" data-speed="0.3" data-speedX="0.15" data-speedY="0.08"></div>
             
             <div class="hero-content">
-                <h1 class="hero-title">
+                <h1 class="hero-title animate-on-scroll" data-animation="fade-up">
                     <span class="title-line">Where Love's</span>
                     <span class="title-line">Journey Begins</span>
                 </h1>
-                <p class="hero-subtitle">Transform your wedding celebration into an unforgettable experience of elegance and connection</p>
-                <p class="hero-description">From the first whispered 'yes' to the final farewell, we orchestrate every moment with the care your love story deserves</p>
-                <div class="hero-cta">
+                <p class="hero-subtitle animate-on-scroll" data-animation="fade-up" data-delay="200">Transform your wedding celebration into an unforgettable experience of elegance and connection</p>
+                <p class="hero-description animate-on-scroll" data-animation="fade-up" data-delay="400">From the first whispered 'yes' to the final farewell, we orchestrate every moment with the care your love story deserves</p>
+                <div class="hero-cta animate-on-scroll" data-animation="fade-up" data-delay="600">
                     <a href="#begin" class="btn btn-primary">Create Your Experience</a>
                     <a href="#features" class="btn btn-secondary">Discover How</a>
                 </div>
             </div>
-            <div class="scroll-indicator">
+            <div class="scroll-indicator animate-on-scroll" data-animation="fade-in" data-delay="1000">
                 <span class="scroll-text">Scroll to Explore</span>
                 <div class="scroll-icon"></div>
             </div>
@@ -82,14 +96,14 @@
         <section class="challenge-section" id="challenge">
             <div class="section-container">
                 <div class="section-header">
-                    <span class="section-subtitle">Behind the Scenes:</span>
-                    <h2 class="section-title">Beyond the Chaos, A Symphony of Celebration</h2>
+                    <span class="section-subtitle animate-on-scroll" data-animation="fade-up">Behind the Scenes:</span>
+                    <h2 class="section-title animate-on-scroll" data-animation="fade-up" data-delay="200">Beyond the Chaos, A Symphony of Celebration</h2>
                 </div>
                 <div class="section-content">
-                    <p class="section-description">Indian weddings are breathtaking celebrations of love and tradition. Yet behind every stunning sangeet lies a complex choreography of details—guest information, transportation logistics, and countless communications that can overwhelm even the most organized couples.</p>
+                    <p class="section-description animate-on-scroll" data-animation="fade-up" data-delay="400">Indian weddings are breathtaking celebrations of love and tradition. Yet behind every stunning sangeet lies a complex choreography of details—guest information, transportation logistics, and countless communications that can overwhelm even the most organized couples.</p>
                     
                     <div class="challenge-cards">
-                        <div class="challenge-card" data-index="1">
+                        <div class="challenge-card animate-on-scroll" data-animation="fade-up" data-delay="500" data-index="1">
                             <div class="card-icon">
                                 <i class="fas fa-heart"></i>
                             </div>
@@ -98,7 +112,7 @@
                                 <p class="card-description">Receive RSVPs from hundreds of loved ones, without the stress of tracking them</p>
                             </div>
                         </div>
-                        <div class="challenge-card" data-index="2">
+                        <div class="challenge-card animate-on-scroll" data-animation="fade-up" data-delay="600" data-index="2">
                             <div class="card-icon">
                                 <i class="fas fa-music"></i>
                             </div>
@@ -107,7 +121,7 @@
                                 <p class="card-description">Orchestrate complex logistics with elegance, not endless documents</p>
                             </div>
                         </div>
-                        <div class="challenge-card" data-index="3">
+                        <div class="challenge-card animate-on-scroll" data-animation="fade-up" data-delay="700" data-index="3">
                             <div class="card-icon">
                                 <i class="fas fa-car-side"></i>
                             </div>
@@ -116,7 +130,7 @@
                                 <p class="card-description">Coordinate transportation with grace, keeping families together</p>
                             </div>
                         </div>
-                        <div class="challenge-card" data-index="4">
+                        <div class="challenge-card animate-on-scroll" data-animation="fade-up" data-delay="800" data-index="4">
                             <div class="card-icon">
                                 <i class="fas fa-comments"></i>
                             </div>
@@ -134,15 +148,15 @@
         <section class="features-section" id="features">
             <div class="section-container">
                 <div class="section-header">
-                    <span class="section-subtitle">Elegant Simplicity</span>
-                    <h2 class="section-title">in Every Detail</h2>
+                    <span class="section-subtitle animate-on-scroll" data-animation="fade-up">Elegant Simplicity</span>
+                    <h2 class="section-title animate-on-scroll" data-animation="fade-up" data-delay="200">in Every Detail</h2>
                 </div>
                 <div class="section-content">
-                    <p class="section-description">Designed with the romance and significance of your celebration in mind, our platform transforms wedding planning from overwhelming to inspiring. Every feature has been crafted to honor the emotional journey of your wedding, ensuring that you can be fully present for every precious moment.</p>
+                    <p class="section-description animate-on-scroll" data-animation="fade-up" data-delay="400">Designed with the romance and significance of your celebration in mind, our platform transforms wedding planning from overwhelming to inspiring. Every feature has been crafted to honor the emotional journey of your wedding, ensuring that you can be fully present for every precious moment.</p>
                     
                     <div class="features-showcase">
                         <div class="feature-row">
-                            <div class="feature-card" data-feature="dashboard">
+                            <div class="feature-card animate-on-scroll" data-animation="fade-right" data-delay="500" data-feature="dashboard">
                                 <div class="feature-icon">
                                     <i class="fas fa-th-large"></i>
                                 </div>
@@ -150,9 +164,10 @@
                                     <h3 class="feature-title">One Dashboard, Total Harmony</h3>
                                     <p class="feature-description">A unified experience where every detail of your celebration flows together in perfect synchronicity</p>
                                 </div>
+                                <div class="card-glare"></div>
                             </div>
                             
-                            <div class="feature-card" data-feature="family">
+                            <div class="feature-card animate-on-scroll" data-animation="fade-left" data-delay="600" data-feature="family">
                                 <div class="feature-icon">
                                     <i class="fas fa-users"></i>
                                 </div>
@@ -160,11 +175,12 @@
                                     <h3 class="feature-title">Family-Centered Design</h3>
                                     <p class="feature-description">Keeping loved ones connected throughout your celebration, honoring the relationships that matter most</p>
                                 </div>
+                                <div class="card-glare"></div>
                             </div>
                         </div>
                         
                         <div class="feature-row">
-                            <div class="feature-card" data-feature="journey">
+                            <div class="feature-card animate-on-scroll" data-animation="fade-right" data-delay="700" data-feature="journey">
                                 <div class="feature-icon">
                                     <i class="fas fa-map-marked-alt"></i>
                                 </div>
@@ -172,9 +188,10 @@
                                     <h3 class="feature-title">From Promise to Forever</h3>
                                     <p class="feature-description">Guiding your journey from engagement to honeymoon with intuitive grace and sophistication</p>
                                 </div>
+                                <div class="card-glare"></div>
                             </div>
                             
-                            <div class="feature-card" data-feature="communication">
+                            <div class="feature-card animate-on-scroll" data-animation="fade-left" data-delay="800" data-feature="communication">
                                 <div class="feature-icon">
                                     <i class="fas fa-comment-dots"></i>
                                 </div>
@@ -182,6 +199,7 @@
                                     <h3 class="feature-title">Seamless Connection</h3>
                                     <p class="feature-description">Maintaining the personal touch in every communication, preserving the intimacy of your celebration</p>
                                 </div>
+                                <div class="card-glare"></div>
                             </div>
                         </div>
                     </div>
@@ -190,16 +208,17 @@
         </section>
 
         <!-- Act 4: The Journey -->
-        <section class="transport-section" id="solutions">
+        <section class="transport-section section-with-parallax" id="solutions">
+            <div class="section-background" data-speed="0.05"></div>
             <div class="section-container">
                 <div class="section-header">
-                    <span class="section-subtitle">Travel Solutions</span>
-                    <h2 class="section-title">Moving Together</h2>
+                    <span class="section-subtitle animate-on-scroll" data-animation="fade-up">Travel Solutions</span>
+                    <h2 class="section-title animate-on-scroll" data-animation="fade-up" data-delay="200">Moving Together</h2>
                 </div>
                 <div class="section-content">
-                    <p class="section-description">Your celebration brings together the most important people in your lives. Our revolutionary transportation system ensures they move through your wedding journey with the same care and attention you've put into every other detail.</p>
+                    <p class="section-description animate-on-scroll" data-animation="fade-up" data-delay="400">Your celebration brings together the most important people in your lives. Our revolutionary transportation system ensures they move through your wedding journey with the same care and attention you've put into every other detail.</p>
                     
-                    <div class="transport-visualization">
+                    <div class="transport-visualization animate-on-scroll" data-animation="fade-in" data-delay="600">
                         <div class="transport-map">
                             <div class="map-container">
                                 <div class="map-background"></div>
@@ -248,36 +267,28 @@
                     </div>
                     
                     <div class="transport-features">
-                        <div class="transport-feature">
-                            <div class="feature-icon">
+                        <div class="transport-feature animate-on-scroll" data-animation="fade-up" data-delay="700">
+                            <div class="transport-icon">
                                 <i class="fas fa-users"></i>
                             </div>
-                            <h3 class="feature-title">Family-Centric Transportation</h3>
-                            <p class="feature-description">Ensuring your loved ones remain together, sharing in the journey as they've shared in your lives</p>
+                            <h3 class="transport-title">Family-Centric Transportation</h3>
+                            <p class="transport-description">Ensuring your loved ones remain together, sharing in the journey as they've shared in your lives</p>
                         </div>
                         
-                        <div class="transport-feature">
-                            <div class="feature-icon">
+                        <div class="transport-feature animate-on-scroll" data-animation="fade-up" data-delay="800">
+                            <div class="transport-icon">
                                 <i class="fas fa-route"></i>
                             </div>
-                            <h3 class="feature-title">Smart Fleet Orchestration</h3>
-                            <p class="feature-description">Elegant coordination of vehicles that reflects the sophistication of your celebration</p>
+                            <h3 class="transport-title">Smart Fleet Orchestration</h3>
+                            <p class="transport-description">Elegant coordination of vehicles that reflects the sophistication of your celebration</p>
                         </div>
                         
-                        <div class="transport-feature">
-                            <div class="feature-icon">
+                        <div class="transport-feature animate-on-scroll" data-animation="fade-up" data-delay="900">
+                            <div class="transport-icon">
                                 <i class="fas fa-clock"></i>
                             </div>
-                            <h3 class="feature-title">Arrival Harmony</h3>
-                            <p class="feature-description">Perfectly timed arrivals that create a seamless flow of joy and celebration</p>
-                        </div>
-                        
-                        <div class="transport-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-bell"></i>
-                            </div>
-                            <h3 class="feature-title">Effortless Updates</h3>
-                            <p class="feature-description">Keeping everyone informed with the grace and attention they deserve</p>
+                            <h3 class="transport-title">Arrival Harmony</h3>
+                            <p class="transport-description">Perfectly timed arrivals that create a seamless flow of joy and celebration</p>
                         </div>
                     </div>
                 </div>
@@ -285,147 +296,109 @@
         </section>
 
         <!-- Act 5: The Connection -->
-        <section class="communication-section" id="communication">
+        <section class="communication-section section-with-parallax" id="communication">
+            <div class="section-background" data-speed="0.08"></div>
             <div class="section-container">
                 <div class="section-header">
-                    <h2 class="section-title">Love Stories Beautifully Told</h2>
+                    <span class="section-subtitle animate-on-scroll" data-animation="fade-up">Meaningful Connections</span>
+                    <h2 class="section-title animate-on-scroll" data-animation="fade-up" data-delay="200">Personal Touch at Scale</h2>
                 </div>
                 <div class="section-content">
-                    <p class="section-description">Your wedding is more than an event—it's a chapter in your love story. Our communication tools ensure that every guest feels connected to this narrative, creating a shared experience that begins long before the celebration and continues well after.</p>
+                    <p class="section-description animate-on-scroll" data-animation="fade-up" data-delay="400">Every guest in your celebration deserves to feel personally welcomed and guided. Our communication system maintains the warmth and intimacy of personal connection, even when coordinating hundreds of loved ones.</p>
                     
                     <div class="communication-showcase">
-                        <div class="whatsapp-frame">
+                        <div class="whatsapp-preview animate-on-scroll" data-animation="fade-right" data-delay="600">
                             <div class="phone-frame">
-                                <div class="phone-header">
-                                    <div class="phone-status-bar">
-                                        <div class="status-time">5:42 PM</div>
-                                        <div class="status-icons">
-                                            <i class="fas fa-wifi"></i>
-                                            <i class="fas fa-battery-three-quarters"></i>
+                                <div class="phone-screen">
+                                    <div class="whatsapp-header">
+                                        <div class="contact-avatar">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                        <div class="contact-info">
+                                            <div class="contact-name">Sharma Family</div>
+                                            <div class="contact-status">online</div>
                                         </div>
                                     </div>
-                                    <div class="chat-header">
-                                        <div class="chat-back">
-                                            <i class="fas fa-arrow-left"></i>
-                                        </div>
-                                        <div class="chat-contact">
-                                            <div class="contact-avatar">
-                                                <img src="images/avatar.jpg" alt="Raj & Anita Wedding" onerror="this.src='data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 viewBox%3D%220 0 64 64%22%3E%3Ccircle cx%3D%2232%22 cy%3D%2232%22 r%3D%2232%22 fill%3D%22%23dfe5e7%22%2F%3E%3Cpath d%3D%22M32 36.8c5.5 0 10-4.5 10-10s-4.5-10-10-10-10 4.5-10 10 4.5 10 10 10zm16.3 3.7c-.8-1.3-2-2.3-3.5-2.8-4.3-1.5-8.7-2.3-13.2-2.3-4.4 0-8.9.8-13.2 2.3-1.5.5-2.7 1.6-3.5 2.8-1.5 2.4-2.4 5.2-2.4 8.3v1.7c0 2.6 2.1 4.7 4.7 4.7h28.6c2.6 0 4.7-2.1 4.7-4.7V48c.2-3-.7-5.8-2.2-8.2z%22 fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E';">
-                                            </div>
-                                            <div class="contact-info">
-                                                <div class="contact-name">Raj & Anita Wedding</div>
-                                                <div class="contact-status">online</div>
-                                            </div>
-                                        </div>
-                                        <div class="chat-actions">
-                                            <i class="fas fa-video"></i>
-                                            <i class="fas fa-phone"></i>
-                                            <i class="fas fa-ellipsis-v"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="phone-content">
-                                    <div class="chat-background"></div>
                                     <div class="message-bubbles">
-                                        <div class="message-date">Today</div>
                                         <div class="message-bubble host">
-                                            <div class="message-content">
-                                                <p>Namaste Priya! We're excited to welcome you to Raj & Anita's wedding celebration. Your RSVP has been confirmed for all 3 days of ceremonies.</p>
-                                                <div class="message-time">5:30 PM <i class="fas fa-check-double"></i></div>
-                                            </div>
+                                            <div class="message-content">Namaste! We're so excited to welcome you to Priya and Arjun's wedding celebration!</div>
+                                            <div class="message-time">4:30 PM</div>
                                         </div>
                                         <div class="message-bubble guest">
-                                            <div class="message-content">
-                                                <p>Thank you! I'm looking forward to it. Will there be transportation from the hotel to the venue?</p>
-                                                <div class="message-time">5:32 PM</div>
-                                            </div>
+                                            <div class="message-content">Thank you! We're looking forward to it. Could you remind us about the sangeet timing?</div>
+                                            <div class="message-time">4:32 PM</div>
+                                        </div>
+                                        <div class="message-bubble host">
+                                            <div class="message-content">Of course! The sangeet begins at 7 PM on Friday at the JW Marriott. Your transportation will arrive at your hotel at 6:15 PM.</div>
+                                            <div class="message-time">4:33 PM</div>
+                                        </div>
+                                        <div class="message-bubble guest">
+                                            <div class="message-content">Perfect, thank you! And is there a dress code?</div>
+                                            <div class="message-time">4:35 PM</div>
                                         </div>
                                         <div class="typing-indicator">
-                                            <span></span>
-                                            <span></span>
-                                            <span></span>
+                                            <span class="dot"></span>
+                                            <span class="dot"></span>
+                                            <span class="dot"></span>
                                         </div>
-                                        <div class="message-bubble host">
-                                            <div class="message-content">
-                                                <p>Yes! We've arranged transportation for you. A car will pick you up from JW Marriott at 5:30 PM on Friday. We've made sure you'll be with your family members.</p>
-                                                <div class="message-time">5:34 PM <i class="fas fa-check-double"></i></div>
-                                            </div>
-                                        </div>
-                                        <div class="message-bubble host">
-                                            <div class="message-content">
-                                                <p>Here are the transportation details:</p>
-                                                <div class="transport-details">
-                                                    <h4>🚗 Your Transport Details</h4>
-                                                    <p>Date: June 17, 2025</p>
-                                                    <p>Pickup: JW Marriott, 5:30 PM</p>
-                                                    <p>Vehicle: White Innova (Sharma Family)</p>
-                                                </div>
-                                                <div class="message-time">5:35 PM <i class="fas fa-check-double"></i></div>
-                                            </div>
-                                        </div>
-                                        <div class="message-bubble guest">
-                                            <div class="message-content">
-                                                <p>Perfect! Thank you for organizing this so well.</p>
-                                                <div class="message-time">5:36 PM</div>
-                                            </div>
-                                        </div>
-                                        <div class="message-input">
-                                            <div class="input-actions">
-                                                <i class="fas fa-smile"></i>
-                                                <i class="fas fa-paperclip"></i>
-                                            </div>
-                                            <div class="input-field">
-                                                <input type="text" placeholder="Type a message">
-                                            </div>
-                                            <div class="input-send">
-                                                <i class="fas fa-microphone"></i>
-                                            </div>
+                                    </div>
+                                    <div class="whatsapp-input">
+                                        <div class="input-field">Type a message...</div>
+                                        <div class="send-button">
+                                            <i class="fas fa-paper-plane"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="communication-features">
-                        <div class="comm-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-user-friends"></i>
-                            </div>
-                            <h3 class="feature-title">Personalized Journeys</h3>
-                            <p class="feature-description">Tailored communications that make each guest feel like an honored part of your story</p>
-                        </div>
                         
-                        <div class="comm-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-bell"></i>
+                        <div class="communication-cards">
+                            <div class="communication-card animate-on-scroll" data-animation="fade-left" data-delay="700">
+                                <div class="communication-icon">
+                                    <i class="fas fa-user-friends"></i>
+                                </div>
+                                <div class="communication-content">
+                                    <h3 class="communication-title">Personalized Journeys</h3>
+                                    <p class="communication-description">Tailored communications that make each guest feel like an honored part of your story</p>
+                                </div>
+                                <div class="card-glare"></div>
                             </div>
-                            <h3 class="feature-title">Meaningful Updates</h3>
-                            <p class="feature-description">Sharing the excitement and anticipation with those who matter most</p>
-                        </div>
-                        
-                        <div class="comm-feature">
-                            <div class="feature-icon">
-                                <i class="fas fa-camera"></i>
+                            
+                            <div class="communication-card animate-on-scroll" data-animation="fade-left" data-delay="800">
+                                <div class="communication-icon">
+                                    <i class="fas fa-bell"></i>
+                                </div>
+                                <div class="communication-content">
+                                    <h3 class="communication-title">Meaningful Updates</h3>
+                                    <p class="communication-description">Sharing the excitement and anticipation with those who matter most</p>
+                                </div>
+                                <div class="card-glare"></div>
                             </div>
-                            <h3 class="feature-title">Cherished Memories</h3>
-                            <p class="feature-description">Preserving the moments and emotions of your celebration for years to come</p>
+                            
+                            <div class="communication-card animate-on-scroll" data-animation="fade-left" data-delay="900">
+                                <div class="communication-icon">
+                                    <i class="fas fa-camera"></i>
+                                </div>
+                                <div class="communication-content">
+                                    <h3 class="communication-title">Cherished Memories</h3>
+                                    <p class="communication-description">Preserving the moments and emotions of your celebration for years to come</p>
+                                </div>
+                                <div class="card-glare"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Act 6: The Beginning -->
-        <section class="cta-section" id="begin">
+        <!-- Act 6: The Call -->
+        <section class="cta-section section-with-parallax" id="begin">
+            <div class="section-background" data-speed="0.1"></div>
             <div class="section-container">
-                <div class="section-header">
-                    <h2 class="section-title">Begin Your Journey</h2>
-                </div>
-                <div class="section-content">
-                    <p class="section-description">Your love story deserves to be celebrated with elegance, intention, and joy. Let us help you create a wedding experience where every detail is handled with care, allowing you to be fully present for every magical moment.</p>
-                    
-                    <div class="cta-container">
+                <div class="cta-content content-parallax" data-speed="0.2" data-direction="up">
+                    <h2 class="cta-title animate-on-scroll" data-animation="fade-up">Begin Your Journey</h2>
+                    <p class="cta-description animate-on-scroll" data-animation="fade-up" data-delay="200">Your love story deserves to be celebrated with elegance, intention, and joy. Let us help you create a wedding experience where every detail is handled with care, allowing you to be fully present for every magical moment.</p>
+                    <div class="cta-button animate-on-scroll" data-animation="fade-up" data-delay="400">
                         <a href="#" class="btn btn-primary btn-large">Create Your Experience</a>
                     </div>
                 </div>
@@ -433,63 +406,60 @@
         </section>
 
         <!-- Footer -->
-        <footer class="site-footer">
+        <footer class="footer">
             <div class="footer-container">
-                <div class="footer-brand">
-                    <span class="brand-name">Eternally Yours</span>
-                    <p class="brand-tagline">Where love's journey begins</p>
-                </div>
-                
-                <div class="footer-links">
+                <div class="footer-content">
                     <div class="footer-column">
-                        <h4 class="footer-heading">Features</h4>
-                        <ul class="footer-menu">
-                            <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Family Design</a></li>
-                            <li><a href="#">Wedding Journey</a></li>
-                            <li><a href="#">Communication</a></li>
-                        </ul>
+                        <div class="footer-logo">
+                            <div class="footer-brand">Eternally Yours</div>
+                            <div class="footer-tagline">Where love's journey begins</div>
+                        </div>
+                        <p>Transforming wedding planning into an experience as beautiful as your celebration.</p>
                     </div>
                     
                     <div class="footer-column">
-                        <h4 class="footer-heading">Solutions</h4>
-                        <ul class="footer-menu">
-                            <li><a href="#">Transportation</a></li>
-                            <li><a href="#">Guest Management</a></li>
-                            <li><a href="#">Event Planning</a></li>
-                            <li><a href="#">Vendor Coordination</a></li>
-                        </ul>
+                        <h4 class="footer-heading">Features</h4>
+                        <div class="footer-links">
+                            <a href="#" class="footer-link">Dashboard</a>
+                            <a href="#" class="footer-link">Family Design</a>
+                            <a href="#" class="footer-link">Wedding Journey</a>
+                            <a href="#" class="footer-link">Communication</a>
+                            <a href="#" class="footer-link">Transportation</a>
+                            <a href="#" class="footer-link">Guest Management</a>
+                            <a href="#" class="footer-link">Event Planning</a>
+                            <a href="#" class="footer-link">Vendor Coordination</a>
+                        </div>
                     </div>
                     
                     <div class="footer-column">
                         <h4 class="footer-heading">Contact</h4>
-                        <ul class="footer-menu">
-                            <li><a href="mailto:hello@eternallyyoursrsvp.in">hello@eternallyyoursrsvp.in</a></li>
-                            <li><a href="tel:+919876543210">+91 98765 43210</a></li>
-                        </ul>
+                        <div class="contact-info">
+                            <a href="mailto:hello@eternallyyoursrsvp.in" class="contact-item">
+                                <span class="contact-icon"><i class="fas fa-envelope"></i></span>
+                                <span>hello@eternallyyoursrsvp.in</span>
+                            </a>
+                            <a href="tel:+919876543210" class="contact-item">
+                                <span class="contact-icon"><i class="fas fa-phone"></i></span>
+                                <span>+91 98765 43210</span>
+                            </a>
+                        </div>
                         <div class="social-links">
                             <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
                             <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p class="copyright">© 2025 Eternally Yours. All rights reserved.</p>
-                <div class="legal-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
+                
+                <div class="footer-bottom">
+                    <div class="copyright">© 2025 Eternally Yours. All rights reserved.</div>
+                    <div class="footer-legal">
+                        <a href="#" class="legal-link">Privacy Policy</a>
+                        <a href="#" class="legal-link">Terms of Service</a>
+                    </div>
                 </div>
             </div>
         </footer>
-    </div>
-
-    <!-- Custom Cursor -->
-    <div class="custom-cursor">
-        <div class="cursor-dot"></div>
-        <div class="cursor-circle"></div>
     </div>
 
     <!-- Scripts -->
@@ -499,5 +469,6 @@
     <script src="js/background.js"></script>
     <script src="js/animations.js"></script>
     <script src="js/interactions.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
