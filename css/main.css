@@ -1,4 +1,4 @@
-/* 
+/*
  * Eternally Yours - Professional Luxury Wedding RSVP Platform
  * Main Stylesheet - Created for eternallyyoursrsvp.in
  * 
@@ -106,7 +106,7 @@ body, html {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  cursor: none; /* Hide default cursor for custom cursor */
+  cursor: none;
 }
 
 a {
@@ -180,16 +180,14 @@ p {
   position: relative;
   min-height: 100vh;
   overflow: hidden;
-  background: transparent !important;
-  background-color: transparent !important;
+  /* DO NOT set background transparent here. */
 }
 
 .section-container {
   max-width: 1440px;
   margin: 0 auto;
   padding: var(--space-xl) var(--space-lg);
-  background: transparent !important;
-  background-color: transparent !important;
+  /* DO NOT set background transparent here. */
 }
 
 .section-header {
@@ -316,17 +314,22 @@ p {
   pointer-events: none;
 }
 
-/* ======= PATCH: Transparent section backgrounds to prevent grey flash ======= */
+/* ======= PATCH: Transparent section backgrounds to prevent grey flash (ONLY problematic overlays) ======= */
 .cta-section,
 .cta-section .section-background,
-.section-with-parallax .section-background,
-.hero-section,
-.challenge-section,
-.features-section,
-.transport-section,
-.communication-section {
+.section-with-parallax .section-background {
   background: transparent !important;
   background-color: transparent !important;
+}
+
+/* ======= PATCH: Restore 3D card backgrounds ======= */
+.challenge-card,
+.feature-card,
+.transport-feature,
+.communication-card {
+  background-color: var(--color-primary-light) !important;
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-lg);
 }
 
 /* ======= NAVIGATION ======= */
@@ -477,4 +480,4 @@ p {
   background-color: transparent !important;
 }
 
-/* ...[rest of your CSS, including cards, features, footer, etc. remain unchanged]... */
+/* ...rest of your CSS, including cards, features, footer, etc. remain unchanged... */
